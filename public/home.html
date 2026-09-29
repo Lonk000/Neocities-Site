@@ -154,17 +154,21 @@ font-size: 16px;
 padding: 4px 8px;
 }
 
-/* WebDAC / Media Player Frame Styling */
+/* WebDAC / Media Player Frame Styling (Centered & Unstretched) */
 .player-frame-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  border: none;
   background: #fff;
+  padding: 1rem !important;
 }
 
 .player-iframe {
-  width: 100%;
-  height: 250px;
+  width: 400px;  /* Adjust this to your player's exact native width */
+  height: 250px; /* Adjust this to your player's exact native height */
   border: none;
+  max-width: 100%;
 }
  
 a{
@@ -371,7 +375,7 @@ margin: 0;
   <!-- BOX 2: WEBDECK / WEBDAC PLAYER -->
   <div class="box">
     <h3 class="subheaders">Audio Player</h3>
-    <div class="content player-frame-container" style="padding: 0;">
+    <div class="content player-frame-container">
       <iframe src="/webdeck-player/index.html" class="player-iframe" title="WebDeck Player"></iframe>
     </div>
   </div>
