@@ -1,5 +1,5 @@
 (() => {
-  const playerPath = "/webdeck-player/index.html";
+  const playerPath = "/webdeck-player/";
   const playerName = "WebDeckPlayer";
   const playerFeatures = "popup,width=600,height=250,resizable=no,scrollbars=no";
   const playerStateKey = "webDeckPlayerOpen";
@@ -7,7 +7,7 @@
     ? new BroadcastChannel("webDeckPlayer")
     : null;
 
-  if (window.location.pathname.endsWith(playerPath)) {
+  if (/\/webdeck-player\/(?:index\.html)?$/.test(window.location.pathname)) {
     localStorage.setItem(playerStateKey, "open");
     window.addEventListener("pagehide", () => {
       localStorage.removeItem(playerStateKey);
@@ -27,7 +27,6 @@
     const playerWindow = window.open(playerPath, playerName, playerFeatures);
     if (!playerWindow) return false;
 
-    localStorage.setItem(playerStateKey, "open");
     return true;
   };
 

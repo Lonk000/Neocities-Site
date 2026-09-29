@@ -134,7 +134,7 @@ function onYouTubeIframeAPIReady() {
     width: '100%',
     playerVars: {
         'controls': 0,
-        'autoplay': 0,
+        'autoplay': 1,
         'playsinline': 1,
         'loop': 1
     },
@@ -336,6 +336,7 @@ function onPlayerReady(event) {
     player.loadPlaylist({ list: myPlaylists[currentPlaylist] });
     player.setVolume(50);
     player.setLoop(true);
+    player.playVideo();
 }
 
 function onPlayerStateChange(event) {
