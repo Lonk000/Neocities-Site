@@ -24,12 +24,12 @@
 
     <nav>
 
-      <a href="index.html">Home</a>
+        <a href="index.html" onclick="openWebDeckPlayer()">Home</a>
 
       <a href="blog.html">Blog</a>
 
       <a href="guestbook.html">Guestbook</a>
-  <a href="/webdeck-player/index.html" target="WebDeckPlayer" onclick="window.open(this.href, 'WebDeckPlayer', 'width=600,height=250'); return false;">Player</a>
+  <a href="/webdeck-player/index.html" target="WebDeckPlayer" data-open-webdeck>Player</a>
 
     </nav>
 
@@ -61,6 +61,7 @@
 
   </div>
 
+<script src="/player-window.js"></script>
 </body>
 
 </html>

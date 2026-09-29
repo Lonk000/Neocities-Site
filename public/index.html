@@ -274,7 +274,7 @@ body::before {
                     <img src="https://iili.io/nY1l1R4.png" alt="Vigil Eye" class="center-vigil-logo">
                     <div class="vigil-title">VIGIL</div>
                     <div class="vigil-subtitle">A safer point of view.</div>
-                    <button class="enter-btn player-launch-btn" type="button" onclick="window.open('/webdeck-player/index.html', 'WebDeckPlayer', 'width=600,height=250')">OPEN PLAYER</button>
+                    <button class="enter-btn player-launch-btn" type="button" onclick="openWebDeckPlayer()">OPEN PLAYER</button>
                     <button class="enter-btn" id="init-btn" onclick="startBootSequence()">INITIALIZE</button>
                   </div>
                 `;
@@ -283,6 +283,7 @@ body::before {
     });
 
     function startBootSequence() {
+        openWebDeckPlayer();
         const btn = document.getElementById('init-btn');
         btn.style.display = 'none';
 
@@ -301,5 +302,6 @@ body::before {
     }
 </script>
  
+<script src="/player-window.js"></script>
 </body>
 </html>
