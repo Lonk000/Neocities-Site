@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lonk of Hyrool - Guestbook</title>
+    <title>Credits & Sources - Lonk of Hyrool</title>
  
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,13 +20,13 @@
 }
  
 body{
-  background: rgb(91, 145, 106);
-  font-size: 16px;
-  color: #111;
-  overflow-x: hidden;
+background: rgb(91, 145, 106);
+font-size: 16px;
+color: #111;
+overflow-x: hidden;
 }
 
-/* Background wrapper */
+/* Background wrapper starts at 50px so it sits under the transparent side2 stripe */
 .page-bg {
   position: fixed;
   top: 0;
@@ -49,10 +49,7 @@ body::before {
   background-size: 100% 4px, 6px 100%;
   pointer-events: none;
 }
-
-/* =========================================
-   MAIN SITE LAYOUT (Your theme)
-   ========================================= */
+ 
 .sidewrapper{
 position: fixed;
 left: 0;
@@ -141,7 +138,17 @@ z-index: 1;
 }
  
 .content{
-padding: 1rem;
+padding: 1.5rem;
+line-height: 1.6;
+}
+
+.content p {
+margin-bottom: 1rem;
+}
+
+.content ul, .content ol {
+margin-left: 20px;
+margin-bottom: 1rem;
 }
  
 .subheaders{
@@ -151,46 +158,21 @@ border-bottom: 3px ridge #51815d;
 font-weight: normal;
 text-transform: uppercase;
 font-size: 16px;
-padding: 4px 8px;
-}
-
-/* Responsive Guestbook Frame Style */
-.guestbook-frame-container {
-  width: 100%;
-  min-height: 600px;
-  border: none;
-  background: #fff;
-}
-
-.guestbook-iframe {
-  width: 100%;
-  height: 650px;
-  border: 1px solid #97D9E9;
+padding: 4px 10px;
 }
  
 a{
-color: #97D9E9;
+color: #005f73;
 text-decoration: none;
 }
  
 .side1 a{
 color: #fff;
 text-decoration: none;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 8px 0;
-}
-
-.side1 span {
-font-size: 13px;
-font-family: 'PT Sans Narrow', sans-serif;
-margin-top: 2px;
 }
  
 a:visited{
-color: #97D9E9;
+color: #005f73;
 }
  
 .side1 a:visited{
@@ -243,12 +225,12 @@ position: fixed;
 bottom: 0;
 right: 0;
 z-index: 3;
+padding-right: 5px;
 }
  
 @media(max-width:750px){
 body{
 background: rgb(91,145,106);
-font-size: 16px;
 }
 .page-bg {
 left: 0;
@@ -259,6 +241,8 @@ z-index: 4;
 }
 .header{
 margin: 0;
+padding: 1.5rem 1rem 0.5rem 1rem;
+font-size: 36px;
 }
 .headerborder{
 display: none;
@@ -288,16 +272,14 @@ font-size: 14px;
 }
 .side1 a {
 display: flex;
-flex-direction: row;
 align-items: center;
 gap: 4px;
-padding: 0;
 }
 .side1 img{
 width: 20px;
 height: 20px;
 }
-.side1 span {
+.side1 p {
 display: inline;
 margin: 0;
 font-size: 13px;
@@ -320,60 +302,60 @@ margin: 0;
  
 <body>
 
-<!-- Background image extending under the transparent stripe -->
+<!-- Background image -->
 <div class="page-bg"></div>
  
-<!-- HEADER -->
+<!-- HEADER TITLE -->
 <div class="headerwrapper">
- 
-<h1 class="header">guestbook!</h1>
+<h1 class="header">sources & credits</h1>
 <div class="headerborder">.</div>
- 
 </div>
  
+<!-- SIDEBAR NAVIGATION WITH SYNTHESIZED SOUNDS -->
 <div class="sidewrapper">
 <div class="sidewrapper2">
- 
-<!-- SIDEBAR LINKS WITH CUSTOM CLICK SOUND -->
 <div class="side1">
-<a href="https://lonkofhyrool.neocities.org/home.html" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/FM4JrM1.png"><span>HOME</span></a>
-<a href="https://lonkofhyrool.neocities.org/blog" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/WeZ6fmy.png"><span>BLOG</span></a>
-<a href="https://lonkofhyrool.neocities.org/guestbook" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/KkJtAml.png"><span>GUESTBOOK</span></a>
-<a href="https://lonkofhyrool.neocities.org/credit" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/eZGAhVt.png"><span>SOURCES</span></a>
-<a href="https://lonkofhyrool.neocities.org/audio" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/2SMR5ij.png"><span>AUDIO</span></a>
-<a href="https://lonkofhyrool.neocities.org/about" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/zKnelZI.png"><span>DATA</span></a>
+<a href="https://lonkofhyrool.neocities.org/home.html" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/FM4JrM1.png"><p>HOME</p></a>
+<a href="https://lonkofhyrool.neocities.org/blog" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/WeZ6fmy.png"><p>BLOG</p></a>
+<a href="https://lonkofhyrool.neocities.org/guestbook" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/KkJtAml.png"><p>GUESTBOOK</p></a>
+<a href="https://lonkofhyrool.neocities.org/credit" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/eZGAhVt.png"><p>SOURCES</p></a>
+<a href="https://lonkofhyrool.neocities.org/audio" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/2SMR5ij.png"><p>AUDIO</p></a>
+<a href="https://lonkofhyrool.neocities.org/about" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/zKnelZI.png"><p>DATA</p></a>
 </div>
- 
-<div class="side2">
-.
-</div>
+<div class="side2">.</div>
 </div>
 </div>
  
+<!-- MAIN CONTENT CONTAINER -->
 <div class="container">
  
-<!-- GUESTBOOK EMBED BOX -->
-<div class="box">
-<h3 class="subheaders">Sign my Guestbook!</h3>
-<div class="content">
-<p style="margin-bottom: 15px;">Leave a note, say hi, or drop a message below!</p>
-  
-<div class="guestbook-frame-container">
-  <iframe src="https://lonk.atabook.org" class="guestbook-iframe" title="Lonk's Atabook Guestbook"></iframe>
-</div>
+  <!-- DOCUMENT BOX -->
+  <div class="box">
+    <h3 class="subheaders">Project Attributions & Credits</h3>
+    <div class="content">
+      
+      <p>This site makes use of or draws inspiration from the following open projects, resources, and creators:</p>
 
-</div>
-</div>
+      <ul>
+        <li><strong>Repth:</strong> Theme framework and layout structure (<a href="https://repth.neocities.org/" target="_blank">repth.neocities.org</a>)</li>
+        <li><strong>Zoner2000:</strong> Project architecture and styling references (<a href="https://github.com/GwyndolynMarchant/zoner2000" target="_blank">Gwyndolyn Marchant on GitHub</a> / <a href="https://www.shadenexus.ca/" target="_blank">Shade Nexus</a>)</li>
+        <li><strong>Ryan Trawick:</strong> Creative coding and technical inspiration (<a href="https://x.com/aynik_co" target="_blank">@aynik_co on X</a>)</li>
+      </ul>
+
+      <hr style="border: 0; border-top: 1px solid #ccc; margin: 1.5rem 0;" />
+
+      <p><em>Thank you to all open creators and developers who keep the independent web vibrant and inspiring!</em></p>
+
+    </div>
+  </div>
 
 </div>
  
-<div class="footerwrapper">
-.
-</div>
- 
+<!-- FOOTER & CREDITS -->
+<div class="footerwrapper">.</div>
 <p id="credit">Theme by <a href="https://repth.neocities.org/index.html">Repth</a></p>
 
-<!-- Custom Audio Script -->
+<!-- Web Audio Synthesizer Script for Sidebar Sound FX -->
 <script>
     function playHoverSound() {
         try {
@@ -396,12 +378,25 @@ margin: 0;
         } catch(e) {}
     }
 
-    function playCustomClickSound() {
-        const clickAudio = document.getElementById('click-audio');
-        if (clickAudio) {
-            clickAudio.currentTime = 0;
-            clickAudio.play().catch(e => console.log("Audio play restricted:", e));
-        }
+    function playClickSound() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(520, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(180, ctx.currentTime + 0.06);
+            
+            gain.gain.setValueAtTime(0.04, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            
+            osc.start();
+            osc.stop(ctx.currentTime + 0.06);
+        } catch(e) {}
     }
 </script>
  
