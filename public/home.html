@@ -141,23 +141,29 @@ z-index: 1;
 }
  
 .content{
-padding: 1rem;
+padding: 1.5rem;
+line-height: 1.6;
 }
 
-/* Standalone Centered Player Styling */
-.player-wrapper {
-  margin-left: 200px;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
+.content p {
+margin-bottom: 1rem;
 }
 
-.player-iframe {
-  border: none;
-  max-width: 100%;
+.content ul, .content ol {
+margin-left: 20px;
+margin-bottom: 1rem;
 }
- 
+
+.subheaders{
+background-color: #000;
+color: #fff;
+border-bottom: 3px ridge #51815d;
+font-weight: normal;
+text-transform: uppercase;
+font-size: 16px;
+padding: 4px 10px;
+}
+
 a{
 color: #97D9E9;
 text-decoration: none;
@@ -303,9 +309,6 @@ padding: 1rem 1rem 4rem 1rem;
 .box{
 margin: 0;
 }
-.player-wrapper {
-margin-left: 0;
-}
 }
 </style>
   </head>
@@ -337,6 +340,7 @@ margin-left: 0;
 <a href="https://lonkofhyrool.neocities.org/guestbook" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/KkJtAml.png"><span>GUESTBOOK</span></a>
 <a href="https://lonkofhyrool.neocities.org/credit" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/eZGAhVt.png"><span>SOURCES</span></a>
 <a href="https://lonkofhyrool.neocities.org/audio" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/2SMR5ij.png"><span>AUDIO</span></a>
+<a href="/webdeck-player/index.html" target="WebDeckPlayer" onclick="window.open(this.href, 'WebDeckPlayer', 'width=600,height=250'); return false;"><img src="https://i.imgur.com/2SMR5ij.png"><span>PLAYER</span></a>
 <a href="https://lonkofhyrool.neocities.org/about" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/zKnelZI.png"><span>DATA</span></a>
 </div>
  
@@ -363,11 +367,6 @@ margin-left: 0;
   </div>
 </div>
 
-<!-- STANDALONE CENTERED AUDIO PLAYER -->
-<div class="player-wrapper">
-  <iframe src="/webdeck-player/index.html" class="player-iframe" width="600" height="250" title="WebDeck Player"></iframe>
-</div>
- 
 <div class="footerwrapper">.</div>
  
 <p id="credit">Theme by <a href="https://repth.neocities.org/index.html">Repth</a></p>

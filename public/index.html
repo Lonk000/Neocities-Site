@@ -155,6 +155,10 @@ body::before {
   text-transform: uppercase;
 }
 
+.player-launch-btn {
+  margin-top: 10px;
+}
+
 @keyframes fadeInBtn {
   to { opacity: 1; }
 }
@@ -270,6 +274,7 @@ body::before {
                     <img src="https://iili.io/nY1l1R4.png" alt="Vigil Eye" class="center-vigil-logo">
                     <div class="vigil-title">VIGIL</div>
                     <div class="vigil-subtitle">A safer point of view.</div>
+                    <button class="enter-btn player-launch-btn" type="button" onclick="window.open('/webdeck-player/index.html', 'WebDeckPlayer', 'width=600,height=250')">OPEN PLAYER</button>
                     <button class="enter-btn" id="init-btn" onclick="startBootSequence()">INITIALIZE</button>
                   </div>
                 `;
