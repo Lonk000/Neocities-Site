@@ -127,7 +127,7 @@ z-index: 2;
 display: flex;
 flex-direction: column;
 padding: 3rem 3rem 5rem 3rem;
-gap: 1rem;
+gap: 1.5rem;
 position: relative;
 z-index: 1;
 }
@@ -143,30 +143,17 @@ z-index: 1;
 .content{
 padding: 1rem;
 }
- 
-.subheaders{
-background-color: #000;
-color: #fff;
-border-bottom: 3px ridge #51815d;
-font-weight: normal;
-text-transform: uppercase;
-font-size: 16px;
-padding: 4px 8px;
-}
 
-/* WebDAC / Media Player Frame Styling (Centered & Unstretched) */
-.player-frame-container {
+/* Standalone Centered Player Styling */
+.player-wrapper {
+  margin-left: 200px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: #fff;
-  padding: 1rem !important;
+  position: relative;
+  z-index: 1;
 }
 
 .player-iframe {
-  width: 400px;  /* Adjust this to your player's exact native width */
-  height: 250px; /* Adjust this to your player's exact native height */
   border: none;
   max-width: 100%;
 }
@@ -316,6 +303,9 @@ padding: 1rem 1rem 4rem 1rem;
 .box{
 margin: 0;
 }
+.player-wrapper {
+margin-left: 0;
+}
 }
 </style>
   </head>
@@ -371,14 +361,11 @@ margin: 0;
       <h3>"There is no such thing as a worthless person, being born is more than enough" - Machida-kun</h3>
     </div>
   </div>
+</div>
 
-  <!-- BOX 2: WEBDECK / WEBDAC PLAYER -->
-  <div class="box">
-    <h3 class="subheaders">Audio Player</h3>
-    <div class="content player-frame-container">
-      <iframe src="/webdeck-player/index.html" class="player-iframe" title="WebDeck Player"></iframe>
-    </div>
-  </div>
+<!-- STANDALONE CENTERED AUDIO PLAYER -->
+<div class="player-wrapper">
+  <iframe src="/webdeck-player/index.html" class="player-iframe" width="600" height="250" title="WebDeck Player"></iframe>
 </div>
  
 <div class="footerwrapper">.</div>
