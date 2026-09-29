@@ -23,9 +23,10 @@
  * You can also delete the lists that you don't want.
 */
 var myPlaylists = {
-    "90s HITS": 'PLZyqOyXxaVETqpHhT_c5GPmAPzhJpJ5K7',
-    "00s HITS": 'PL69714D95619E327E',
-    "VAPORWAVE": 'PLSChV4T8EDb9TZsLO23Tsj6-UUyAXtGg5',
+    "Natsume": 'PLGM8jlqEpx28',
+    "Zelda": 'PL6VKYupomQTOwGK6MLNT17pUvD5GaPiSx',
+    "Persona": 'PL06QyxlYtKLUbo_aGfF3qKx9FHh-Uuoq_',
+    "Whirling in Rags": 'PLF4bRxcwJEfEl1DrfOaLWyQ-kIAz8wDSW',
     //"ANOTHER PLAYLIST": 'PLZyqOyXxaVETqpHhT_c5GPmAPzhJpJ5K7',
 };
 
@@ -35,7 +36,7 @@ var myPlaylists = {
  * The first playlist that the player will load on startup. You may change it by
  * writing the name of the new playlist below.
 */
-var currentPlaylist = "90s HITS";
+var currentPlaylist = "Natsume";
 
 
 /**
@@ -60,7 +61,7 @@ var myThemes = {
  * [4. CURRENT THEME]
  * Set the theme of your player writing its name below.
  */
-var currentTheme = "DEFAULT";
+var currentTheme = "SILVER";
 
 
 // ===== END OF CONFIGURATION =====

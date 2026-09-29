@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lonk of Hyrool - Home</title>
+    <title>Audio & Playlists - Lonk of Hyrool</title>
  
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,13 +20,13 @@
 }
  
 body{
-  background: rgb(91, 145, 106);
-  font-size: 16px;
-  color: #111;
-  overflow-x: hidden;
+background: rgb(91, 145, 106);
+font-size: 16px;
+color: #111;
+overflow-x: hidden;
 }
 
-/* Background wrapper */
+/* Background wrapper starts at 50px so it sits under the transparent side2 stripe */
 .page-bg {
   position: fixed;
   top: 0;
@@ -49,10 +49,7 @@ body::before {
   background-size: 100% 4px, 6px 100%;
   pointer-events: none;
 }
-
-/* =========================================
-   MAIN SITE LAYOUT (Your theme)
-   ========================================= */
+ 
 .sidewrapper{
 position: fixed;
 left: 0;
@@ -141,7 +138,27 @@ z-index: 1;
 }
  
 .content{
-padding: 1rem;
+padding: 1.5rem;
+line-height: 1.6;
+}
+
+.content p {
+margin-bottom: 1rem;
+}
+
+.content ul {
+list-style-type: none;
+margin-left: 0;
+margin-bottom: 1rem;
+display: flex;
+flex-direction: column;
+gap: 0.75rem;
+}
+
+.content li {
+background: rgba(81, 129, 93, 0.1);
+border-left: 4px solid #51815d;
+padding: 10px 15px;
 }
  
 .subheaders{
@@ -151,31 +168,21 @@ border-bottom: 3px ridge #51815d;
 font-weight: normal;
 text-transform: uppercase;
 font-size: 16px;
+padding: 4px 10px;
 }
  
 a{
-color: #97D9E9;
+color: #005f73;
 text-decoration: none;
 }
  
 .side1 a{
 color: #fff;
 text-decoration: none;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 8px 0;
-}
-
-.side1 span {
-font-size: 13px;
-font-family: 'PT Sans Narrow', sans-serif;
-margin-top: 2px;
 }
  
 a:visited{
-color: #97D9E9;
+color: #005f73;
 }
  
 .side1 a:visited{
@@ -228,12 +235,12 @@ position: fixed;
 bottom: 0;
 right: 0;
 z-index: 3;
+padding-right: 5px;
 }
  
 @media(max-width:750px){
 body{
 background: rgb(91,145,106);
-font-size: 16px;
 }
 .page-bg {
 left: 0;
@@ -244,6 +251,8 @@ z-index: 4;
 }
 .header{
 margin: 0;
+padding: 1.5rem 1rem 0.5rem 1rem;
+font-size: 36px;
 }
 .headerborder{
 display: none;
@@ -273,16 +282,14 @@ font-size: 14px;
 }
 .side1 a {
 display: flex;
-flex-direction: row;
 align-items: center;
 gap: 4px;
-padding: 0;
 }
 .side1 img{
 width: 20px;
 height: 20px;
 }
-.side1 span {
+.side1 p {
 display: inline;
 margin: 0;
 font-size: 13px;
@@ -305,74 +312,74 @@ margin: 0;
  
 <body>
 
-<!-- Audio Elements -->
-<audio id="bg-audio" loop>
-    <source src="https://actions.google.com/sounds/v1/ambiences/sci_fi_bridge.ogg" type="audio/ogg">
-</audio>
-<audio id="click-audio" src="https://raw.githubusercontent.com/Lonk000/Neocities-Site/main/public/sounds/click.mp3"></audio>
-
 <!-- Background image -->
 <div class="page-bg"></div>
  
-<!-- HEADER -->
+<!-- HEADER TITLE -->
 <div class="headerwrapper">
-<h1 class="header">hello!</h1>
+<h1 class="header">audio</h1>
 <div class="headerborder">.</div>
 </div>
  
+<!-- SIDEBAR NAVIGATION WITH SYNTHESIZED SOUNDS -->
 <div class="sidewrapper">
 <div class="sidewrapper2">
- 
-<!-- SIDEBAR LINKS -->
 <div class="side1">
-<a href="https://lonkofhyrool.neocities.org/home.html" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/FM4JrM1.png"><span>HOME</span></a>
-<a href="https://lonkofhyrool.neocities.org/blog" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/WeZ6fmy.png"><span>BLOG</span></a>
-<a href="https://lonkofhyrool.neocities.org/guestbook" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/KkJtAml.png"><span>GUESTBOOK</span></a>
-<a href="https://lonkofhyrool.neocities.org/credit" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/eZGAhVt.png"><span>SOURCES</span></a>
-<a href="https://lonkofhyrool.neocities.org/audio" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/2SMR5ij.png"><span>AUDIO</span></a>
-<a href="https://lonkofhyrool.neocities.org/about" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/zKnelZI.png"><span>DATA</span></a>
+<a href="https://lonkofhyrool.neocities.org/home.html" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/FM4JrM1.png"><p>HOME</p></a>
+<a href="https://lonkofhyrool.neocities.org/blog" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/WeZ6fmy.png"><p>BLOG</p></a>
+<a href="https://lonkofhyrool.neocities.org/guestbook" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/KkJtAml.png"><p>GUESTBOOK</p></a>
+<a href="https://lonkofhyrool.neocities.org/credit" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/eZGAhVt.png"><p>SOURCES</p></a>
+<a href="https://lonkofhyrool.neocities.org/audio" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/2SMR5ij.png"><p>AUDIO</p></a>
+<a href="https://lonkofhyrool.neocities.org/about" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/zKnelZI.png"><p>DATA</p></a>
 </div>
- 
 <div class="side2">.</div>
 </div>
 </div>
  
+<!-- MAIN CONTENT CONTAINER -->
 <div class="container">
-<!-- BOX 1 -->
-<div class="box">
-<h3 class="subheaders">About Me!</h3>
-<div class="content">
-<img style="float:left;margin:0px 10px 10px 0px;width:230px;border:1px solid #97D9E9;" src="https://iili.io/F6Endej.jpg"><img>
-<br/>  
-Hi! I'm Lonk! I tend to not know about a lot of stuff, so forgive me if I don't get something. Feel free to send a message if you feel like it or somethin' 
-<br/>
-<br/>
-Discord: lonkofhyrool
-<br/>
-<br/>
-<h3>Fun fact, during COVID, I consumed every piece of media imaginable. Name anything and I bet you I will know about it to some extent. Try me (｀▽´)!!</h3>
-<br/>
-<br/>
-
-<hr/>
-<h3>"There is no such thing as a worthless person, being born is more than enough" - Machida-kun</h3>
-</div>
-</div>
-</div>
-
-<iframe src="/webdeck-player/index.html" height="250" width="600"></iframe>
  
+  <!-- DOCUMENT BOX -->
+  <div class="box">
+    <h3 class="subheaders">Site Playlists & Music</h3>
+    <div class="content">
+      
+      <p>A collection of music and curated audio playlists featured across the site:</p>
+
+      <ul>
+        <li>
+          <a href="https://www.youtube.com/playlist?list=PLGM8jlqEpx28" target="_blank">Playlist 1</a> <br>
+          <small style="color: #555; word-break: break-all;">https://www.youtube.com/playlist?list=PLGM8jlqEpx28</small>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/playlist?list=PL6VKYupomQTOwGK6MLNT17pUvD5GaPiSx" target="_blank">Playlist 2</a> <br>
+          <small style="color: #555; word-break: break-all;">https://www.youtube.com/playlist?list=PL6VKYupomQTOwGK6MLNT17pUvD5GaPiSx</small>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/playlist?list=PL06QyxlYtKLUbo_aGfF3qKx9FHh-Uuoq_" target="_blank">Playlist 3</a> <br>
+          <small style="color: #555; word-break: break-all;">https://www.youtube.com/playlist?list=PL06QyxlYtKLUbo_aGfF3qKx9FHh-Uuoq_</small>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/playlist?list=PLF4bRxcwJEfEl1DrfOaLWyQ-kIAz8wDSW" target="_blank">Playlist 4</a> <br>
+          <small style="color: #555; word-break: break-all;">https://www.youtube.com/playlist?list=PLF4bRxcwJEfEl1DrfOaLWyQ-kIAz8wDSW</small>
+        </li>
+      </ul>
+
+      <hr style="border: 0; border-top: 1px solid #ccc; margin: 1.5rem 0;" />
+
+      <p><em>Enjoy the tunes!</em></p>
+
+    </div>
+  </div>
+
+</div>
+ 
+<!-- FOOTER & CREDITS -->
 <div class="footerwrapper">.</div>
- 
 <p id="credit">Theme by <a href="https://repth.neocities.org/index.html">Repth</a></p>
 
-<!-- Audio & Ambient Scripts -->
+<!-- Web Audio Synthesizer Script for Sidebar Sound FX -->
 <script>
-    window.addEventListener('DOMContentLoaded', () => {
-        const bgAudio = document.getElementById('bg-audio');
-        bgAudio.play().catch(e => console.log("Audio autoplay restricted:", e));
-    });
-
     function playHoverSound() {
         try {
             const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -394,12 +401,25 @@ Discord: lonkofhyrool
         } catch(e) {}
     }
 
-    function playCustomClickSound() {
-        const clickAudio = document.getElementById('click-audio');
-        if (clickAudio) {
-            clickAudio.currentTime = 0;
-            clickAudio.play().catch(e => console.log("Audio play restricted:", e));
-        }
+    function playClickSound() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(520, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(180, ctx.currentTime + 0.06);
+            
+            gain.gain.setValueAtTime(0.04, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            
+            osc.start();
+            osc.stop(ctx.currentTime + 0.06);
+        } catch(e) {}
     }
 </script>
  
