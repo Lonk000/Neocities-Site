@@ -1,0 +1,160 @@
+/* style.css */
+body {
+  background: #fdfdfd url('https://www.transparenttextures.com/patterns/notebook.png') repeat;
+  font-family: 'Tahoma', 'Courier New', monospace;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #fff;
+  border-bottom: 2px solid #999;
+  padding: 1rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header h1 {
+  font-size: 2rem;
+  color: #333;
+  font-weight: normal;
+  margin: 0;
+}
+
+nav {
+  margin-top: 0.5rem;
+}
+
+nav a {
+  margin: 0 0.75rem;
+  color: #005aff;
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+nav a:hover {
+  text-decoration: none;
+  background: #f0f0ff;
+  border-radius: 3px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 2rem auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 1.5rem;
+  border: 1px solid #999;
+  box-shadow: 4px 4px 0 #ccc;
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar {
+  position: fixed;
+  top: 5rem;
+  left: 1rem;
+  width: 160px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #aaa;
+  box-shadow: 3px 3px 0 #bbb;
+  font-size: 0.9rem;
+  z-index: 2;
+}
+
+.sidebar h3 {
+  font-size: 1.1rem;
+  margin-top: 0;
+  border-bottom: 1px solid #999;
+  padding-bottom: 0.25rem;
+  color: #222;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+
+.sidebar li {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar a {
+  color: #005aff;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+  background: #eef;
+}
+
+h2, h3 {
+  font-family: 'Tahoma', sans-serif;
+  color: #222;
+  border-left: 5px solid #666;
+  padding-left: 0.5rem;
+}
+
+article {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #fdfdfd;
+  border: 1px dotted #aaa;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.05);
+}
+
+article h3 {
+  margin-top: 0;
+}
+
+em {
+  color: #666;
+  font-style: italic;
+}
+
+.guestbook-form input,
+.guestbook-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid #aaa;
+  font-family: inherit;
+  background: #f9f9f9;
+  color: #222;
+}
+
+.guestbook-form button {
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.guestbook-form button:hover {
+  background-color: #555;
+}
+
+.messages p {
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid #999;
+  font-family: monospace;
+  color: #444;
+  background: #fcfcfc;
+  border-radius: 3px;
+  padding: 0.75rem;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.05);
+}
+
+.messages p:not(:last-child) {
+  margin-bottom: 1rem;
+}

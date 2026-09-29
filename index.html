@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lonk of Hyrool</title>
+ 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap" rel="stylesheet">
+ 
+<style>
+*, h1, h2, h3, h4, h5, h6 {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Karla', sans-serif;
+}
+ 
+body{
+background: rgb(91, 145, 106);
+font-size: 16px;
+color: #111;
+overflow-x: hidden;
+}
+
+/* Background wrapper starts at 50px so it sits under the transparent side2 stripe */
+.page-bg {
+  position: fixed;
+  top: 0;
+  left: 50px; 
+  right: 0;
+  bottom: 0;
+  background: url('https://i.imgur.com/CrmWR1m.png') no-repeat center center;
+  background-size: cover;
+  z-index: 0;
+}
+ 
+.sidewrapper{
+position: fixed;
+left: 0;
+top: 0;
+height: 100%;
+z-index: 4;
+}
+ 
+.sidewrapper2{
+display: flex;
+flex-direction: row;
+height: 100%;
+}
+ 
+.side1{
+background-color: #000;
+width: 150px;
+height: 100%;
+display: flex;
+flex-direction: column;
+text-align: center;
+font-size: 28px;
+font-family: 'PT Sans Narrow', sans-serif;
+padding: 1.5rem 0 1.5rem 0;
+overflow: scroll;
+overflow-x: hidden;
+}
+ 
+.side2{
+background-color: #000;
+opacity: 0.7;
+width: 50px;
+height: 100%;
+}
+ 
+.headerwrapper{
+width: 100%;
+display: flex;
+flex-direction: column;
+position: relative;
+z-index: 3;
+}
+ 
+.headerborder{
+background: rgba(0, 0, 0, 0.8);
+width: 100%;
+height: 25px;
+}
+ 
+.header{
+margin-left: 200px;
+font-size: 56px;
+padding-top: 3rem;
+line-height: 38px;
+font-family: 'Arial', sans-serif;
+text-shadow: 3px 3px 0px #51815d;
+color: #000;
+}
+ 
+.footerwrapper{
+width: 100%;
+background-color: #000;
+opacity: 0.7;
+height: 40px;
+position: fixed;
+bottom: 0;
+left: 0;
+z-index: 2;
+}
+ 
+.container{
+display: flex;
+flex-direction: column;
+padding: 3rem 3rem 5rem 3rem;
+gap: 1rem;
+position: relative;
+z-index: 1;
+}
+ 
+.box{
+background: rgba(255, 255, 255, 0.9);
+border: 5px ridge #51815d;
+margin-left: 200px;
+position: relative;
+z-index: 1;
+}
+ 
+.content{
+padding: 1rem;
+}
+ 
+.subheaders{
+background-color: #000;
+color: #fff;
+border-bottom: 3px ridge #51815d;
+font-weight: normal;
+text-transform: uppercase;
+font-size: 16px;
+}
+ 
+.altimitlogo{
+position: fixed;
+right: 1rem;
+top: 42%;
+width: 480px;
+}
+ 
+a{
+color: #97D9E9;
+text-decoration: none;
+}
+ 
+.side1 a{
+color: #fff;
+text-decoration: none;
+}
+ 
+a:visited{
+color: #97D9E9;
+}
+ 
+.side1 a:visited{
+color: #fff;
+}
+ 
+a:hover{
+font-weight: bold;
+text-shadow: none;
+}
+ 
+.side1 a:hover{
+font-weight: normal;
+text-shadow: 0 0 5px #fff;
+color: #97D9E9;
+}
+ 
+a:active{
+font-weight: normal;
+}
+ 
+::-webkit-scrollbar{
+width: 8px; 
+}
+ 
+::-webkit-scrollbar-track{
+background-color: #000;
+}
+ 
+::-webkit-scrollbar-thumb{
+background-color: #C09657;
+}
+ 
+.side1::-webkit-scrollbar{
+width: 3px; 
+}
+ 
+.side1::-webkit-scrollbar-track{
+background-color: #000;
+}
+ 
+.side1::-webkit-scrollbar-thumb{
+background: rgba(255, 255, 255, 0.3);
+}
+ 
+#credit{
+color: #fff;
+font-size: 12px;
+position: fixed; 
+bottom: 0;
+right: 0;
+z-index: 3;
+}
+ 
+@media(max-width:750px){
+body{
+background: rgb(91,145,106);
+}
+.page-bg {
+left: 0;
+}
+.img{
+width: 300px;
+}
+.headerwrapper{
+position: relative;
+z-index: 4;
+}
+.header{
+margin: 0;
+}
+.headerborder{
+display: none;
+}
+.sidewrapper{
+position: relative;
+z-index: 5;
+position: sticky;
+top: 0;
+}
+.sidewrapper2{
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+.side1{
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+width: 100%;
+height: auto;
+padding: 0.5rem;
+font-size: 18px;
+}
+.side1 img{
+width: 48px;
+}
+.side2{
+width: 100%;
+height: 25px;
+}
+.container{
+padding: 1rem 1rem 4rem 1rem;
+}
+.box{
+margin: 0;
+}
+}
+</style>
+ 
+  </head>
+ 
+<body>
+
+<!-- Background image extending under the transparent stripe -->
+<div class="page-bg"></div>
+ 
+<!-- HEADER -->
+<div class="headerwrapper">
+ 
+<h1 class="header">hello!</h1>
+<div class="headerborder">.</div>
+ 
+</div>
+ 
+<div class="sidewrapper">
+<div class="sidewrapper2">
+ 
+<!-- SIDEBAR LINKS -->
+<div class="side1">
+<a href="https://lonkofhyrool.neocities.org/"><img src="https://i.imgur.com/FM4JrM1.png"><p>HOME</a></p>
+<a href="https://lonkofhyrool.neocities.org/blog"><img src="https://i.imgur.com/WeZ6fmy.png"><p>BLOG</a></p>
+<a href="https://lonkofhyrool.neocities.org/guestbook"><img src="https://i.imgur.com/KkJtAml.png"><p>GUESTBOOK</a></p>
+<a href="https://lonkofhyrool.neocities.org/credit"><img src="https://i.imgur.com/eZGAhVt.png"><p>SOURCES</a></p>
+<a href="https://lonkofhyrool.neocities.org/audio"><img src="https://i.imgur.com/2SMR5ij.png"><p>AUDIO</a></p>
+<a href="https://lonkofhyrool.neocities.org/about"><img src="https://i.imgur.com/zKnelZI.png"><p>DATA</a></p>
+</div>
+ 
+<div class="side2">
+.
+</div>
+</div>
+</div>
+ 
+<div class="container">
+ 
+<!-- BOX 1 -->
+<div class="box">
+<h3 class="subheaders">About Me!</h3>
+<div class="content">
+<img style="float:left;margin:0px 10px 10px 0px;width:230px;border:1px solid #97D9E9;" src="https://iili.io/F6Endej.jpg"><img>
+<br/>  
+Hi! I'm Lonk! I tend to not know about a lot of stuff, so forgive me if I don't get something. Feel free to send a message if you feel like it or somethin' 
+<br/>
+<br/>
+Discord: lonkofhyrool
+<br/>
+<br/>
+<h3>Fun fact, during COVID, I consumed every piece of media imaginable. Name anything and I bet you I will know about it to some extent. Try me (｀▽´)!!</h3>
+<br/>
+<br/>
+
+<hr/>
+<h3>"There is no such thing as a worthless person, being born is more than enough" - Machida-kun</h3>
+</div>
+</div>
+ 
+<div class="footerwrapper">
+.
+</div>
+ 
+<p id="credit">Theme by <a href="https://repth.neocities.org/index.html">Repth</a></p>
+ 
+</body>
+ 
+</html>
