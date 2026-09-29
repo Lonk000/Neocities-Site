@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
  
 <style>
 *, h1, h2, h3, h4, h5, h6 {
@@ -35,6 +36,18 @@ overflow-x: hidden;
   background: url('https://i.imgur.com/CrmWR1m.png') no-repeat center center;
   background-size: cover;
   z-index: 0;
+}
+
+/* CRT Scanline Overlay */
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  z-index: 999;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
 }
  
 .sidewrapper{
@@ -253,18 +266,28 @@ align-items: center;
 justify-content: center;
 width: 100%;
 height: auto;
-padding: 0.5rem;
-font-size: 18px;
+padding: 0.5rem 0.25rem;
+gap: 10px;
+font-size: 14px;
+}
+.side1 a {
+display: flex;
+align-items: center;
+gap: 4px;
 }
 .side1 img{
-width: 32px;
+width: 20px;
+height: 20px;
 }
 .side1 p {
-display: none; /* Hides text labels on mobile if they take up too much space, or remove this line */
+display: inline; /* Makes text show next to the icon on mobile instead of hiding */
+margin: 0;
+font-size: 13px;
+font-family: 'PT Sans Narrow', sans-serif;
 }
 .side2{
 width: 100%;
-height: 25px;
+height: 15px;
 }
 .container{
 padding: 1rem 1rem 4rem 1rem;
@@ -288,16 +311,16 @@ margin: 0;
 <div class="headerborder">.</div>
 </div>
  
-<!-- SIDEBAR NAVIGATION -->
+<!-- SIDEBAR NAVIGATION WITH SYNTHESIZED SOUNDS -->
 <div class="sidewrapper">
 <div class="sidewrapper2">
 <div class="side1">
-<a href="https://lonkofhyrool.neocities.org/"><img src="https://i.imgur.com/FM4JrM1.png"><p>HOME</a></p>
-<a href="https://lonkofhyrool.neocities.org/blog"><img src="https://i.imgur.com/WeZ6fmy.png"><p>BLOG</a></p>
-<a href="https://lonkofhyrool.neocities.org/guestbook"><img src="https://i.imgur.com/KkJtAml.png"><p>GUESTBOOK</a></p>
-<a href="https://lonkofhyrool.neocities.org/credit"><img src="https://i.imgur.com/eZGAhVt.png"><p>SOURCES</a></p>
-<a href="https://lonkofhyrool.neocities.org/audio"><img src="https://i.imgur.com/2SMR5ij.png"><p>AUDIO</a></p>
-<a href="https://lonkofhyrool.neocities.org/about"><img src="https://i.imgur.com/zKnelZI.png"><p>DATA</a></p>
+<a href="https://lonkofhyrool.neocities.org/" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/FM4JrM1.png"><p>HOME</a></p>
+<a href="https://lonkofhyrool.neocities.org/blog" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/WeZ6fmy.png"><p>BLOG</a></p>
+<a href="https://lonkofhyrool.neocities.org/guestbook" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/KkJtAml.png"><p>GUESTBOOK</a></p>
+<a href="https://lonkofhyrool.neocities.org/credit" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/eZGAhVt.png"><p>SOURCES</a></p>
+<a href="https://lonkofhyrool.neocities.org/audio" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/2SMR5ij.png"><p>AUDIO</a></p>
+<a href="https://lonkofhyrool.neocities.org/about" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/zKnelZI.png"><p>DATA</a></p>
 </div>
 <div class="side2">.</div>
 </div>
@@ -313,10 +336,7 @@ margin: 0;
       
       <p>Type your paragraphs here! This template is structured just like a document canvas. You can duplicate this entire <code>&lt;div class="box"&gt;...&lt;/div&gt;</code> block if you want to add more sections or modules down the page.</p>
 
-      <!-- Example of adding an image with text wrapping -->
-      <!-- <img style="float:left; margin:0px 15px 10px 0px; width:200px; border:1px solid #51815d;" src="YOUR-IMAGE-URL-HERE"> -->
-
-      <p>Here is a bulleted list example:</p>
+      <p>Here is a bulleted list group:</p>
       <ul>
         <li>First list item</li>
         <li>Second list item</li>
@@ -334,6 +354,51 @@ margin: 0;
 <!-- FOOTER & CREDITS -->
 <div class="footerwrapper">.</div>
 <p id="credit">Theme by <a href="https://repth.neocities.org/index.html">Repth</a></p>
+
+<!-- Web Audio Synthesizer Script for Sidebar Sound FX -->
+<script>
+    function playHoverSound() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(300, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + 0.05);
+            
+            gain.gain.setValueAtTime(0.03, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            
+            osc.start();
+            osc.stop(ctx.currentTime + 0.05);
+        } catch(e) {}
+    }
+
+    function playClickSound() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(520, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(180, ctx.currentTime + 0.06);
+            
+            gain.gain.setValueAtTime(0.04, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            
+            osc.start();
+            osc.stop(ctx.currentTime + 0.06);
+        } catch(e) {}
+    }
+</script>
  
 </body>
 </html>
