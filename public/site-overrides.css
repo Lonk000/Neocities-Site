@@ -23,6 +23,7 @@ a:active {
   text-shadow: 3px 3px 0 #51815d !important;
 }
 
-.header {
+.header,
+h1 {
   text-shadow: 3px 3px 0 #51815d !important;
 }
