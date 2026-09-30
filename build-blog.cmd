@@ -26,7 +26,8 @@ if not exist "%GENERATED_BLOG%\index.html" (
   exit /b 1
 )
 
-if not exist "%PUBLISHED_BLOG%" mkdir "%PUBLISHED_BLOG%"
+if exist "%PUBLISHED_BLOG%" rmdir /s /q "%PUBLISHED_BLOG%"
+mkdir "%PUBLISHED_BLOG%"
 xcopy "%GENERATED_BLOG%\*" "%PUBLISHED_BLOG%\" /e /i /y >nul
 if errorlevel 1 exit /b 1
 

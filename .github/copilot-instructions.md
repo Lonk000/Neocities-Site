@@ -1,9 +1,10 @@
 # Repository Instructions
 
 ## Project
-- This is a static Neocities website. The deploy workflow publishes `public/` directly; there is no app framework or build step.
+- This is a static Neocities website. The deploy workflow publishes `public/` directly, with no site-wide application framework or build step; the blog has its own optional Zoner2000 build script.
 - Site pages and deployable assets belong in `public/`. `template.html` at the repository root is a starter template, not a build input.
 - Deployment runs on pushes to `main` through `.github/workflows/neocities.yml` and requires the `NEOCITIES_API_TOKEN` secret. Do not change deployment behavior unless requested.
+- Zoner2000 Markdown sources live in root-level `blog-zone/`; run `build-blog.cmd` to generate and sync the blog into `public/blog/`. Never build the blog into `public/` root or overwrite `public/index.html`.
 
 ## Editing
 - Preserve the existing page-specific designs. Some pages use inline CSS and bespoke layouts; `public/style.css` is used by pages that link it. Do not consolidate styles or make pages visually uniform unless requested.
