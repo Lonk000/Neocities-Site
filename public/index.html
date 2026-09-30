@@ -64,6 +64,49 @@ body::before {
   overflow-y: auto;
 }
 
+.altimit-brand {
+  position: absolute;
+  z-index: 2;
+  top: 3vw;
+  right: 3vw;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border: 1px solid rgba(136, 213, 224, 0.6);
+  background: rgba(2, 6, 3, 0.9);
+  color: #d9f7fa;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.altimit-symbol {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid #88d5e0;
+  color: #88d5e0;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.altimit-wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.altimit-name {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.altimit-os-label {
+  color: #88d5e0;
+  font-size: 9px;
+  line-height: 1;
+}
+
 .boot-log {
   font-size: clamp(12px, 1.4vw, 15px);
   color: #5b916a;
@@ -137,6 +180,14 @@ body::before {
   text-align: center;
 }
 
+.vigil-affiliation {
+  margin-top: -16px;
+  margin-bottom: 24px;
+  color: #88d5e0;
+  font-size: 10px;
+  text-align: center;
+}
+
 .terminal-bottom {
   height: 40px;
   width: 100%;
@@ -197,6 +248,14 @@ body::before {
 
 <!-- FULL-SCREEN VIGIL TERMINAL -->
 <div id="landing-overlay">
+  <div class="altimit-brand" aria-label="ALTIMIT OS">
+    <span class="altimit-symbol" aria-hidden="true">A</span>
+    <span class="altimit-wordmark">
+      <span class="altimit-name">ALTIMIT</span>
+      <span class="altimit-os-label">OPERATING SYSTEM</span>
+    </span>
+  </div>
+
   <div class="terminal-top">
     <div class="boot-log" id="boot-text"><span class="cursor" id="cursor"></span></div>
   </div>
@@ -270,6 +329,7 @@ body::before {
                     <img src="https://iili.io/nY1l1R4.png" alt="Vigil Eye" class="center-vigil-logo">
                     <div class="vigil-title">VIGIL</div>
                     <div class="vigil-subtitle">A safer point of view.</div>
+                    <div class="vigil-affiliation">INDEPENDENT SECURITY ORGANIZATION &middot; RUNNING ON ALTIMIT OS</div>
                     <button class="enter-btn" id="init-btn" onclick="startBootSequence()">CONNECT</button>
                   </div>
                 `;
