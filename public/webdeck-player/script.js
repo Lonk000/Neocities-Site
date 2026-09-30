@@ -23,6 +23,7 @@
  * You can also delete the lists that you don't want.
 */
 var myPlaylists = {
+    "Welcome to The World": 'dwF8DABIxAQ',
     "Natsume": 'PLGM8jlqEpx28',
     "Zelda": 'PL6VKYupomQTOwGK6MLNT17pUvD5GaPiSx',
     "Persona": 'PL06QyxlYtKLUbo_aGfF3qKx9FHh-Uuoq_',
@@ -36,7 +37,7 @@ var myPlaylists = {
  * The first playlist that the player will load on startup. You may change it by
  * writing the name of the new playlist below.
 */
-var currentPlaylist = "Natsume";
+var currentPlaylist = "Welcome to The World";
 
 
 /**
