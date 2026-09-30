@@ -3,6 +3,8 @@
   const playerName = "WebDeckPlayer";
   const playerFeatures = "popup,width=640,height=340,resizable=no,scrollbars=no";
   const playerStateKey = "webDeckPlayerOpen";
+  const sidebarClickAudio = document.getElementById("click-audio")
+    ?? new Audio("/sounds/click.mp3");
   const channel = "BroadcastChannel" in window
     ? new BroadcastChannel("webDeckPlayer")
     : null;
@@ -29,6 +31,14 @@
 
     return true;
   };
+
+  document.addEventListener("click", (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target?.closest(".side1 a")) return;
+
+    sidebarClickAudio.currentTime = 0;
+    sidebarClickAudio.play().catch(() => {});
+  });
 
   document.addEventListener("click", (event) => {
     const launcher = event.target.closest("[data-open-webdeck]");
