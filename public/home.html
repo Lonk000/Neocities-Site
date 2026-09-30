@@ -333,6 +333,64 @@ bottom: 0;
 right: 0;
 z-index: 3;
 }
+
+.reboot-control {
+position: fixed;
+z-index: 6;
+right: 12px;
+top: 12px;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+gap: 8px;
+width: 52px;
+height: 48px;
+padding: 4px;
+overflow: hidden;
+border: 2px solid #51815d;
+background: #020603;
+box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+text-decoration: none;
+transition: width 0.25s ease;
+}
+
+.reboot-control:hover,
+.reboot-control:focus-visible {
+width: 154px;
+}
+
+.reboot-control:focus-visible {
+outline: 2px solid #89dda1;
+outline-offset: 3px;
+}
+
+.reboot-icon {
+display: block;
+flex: 0 0 36px;
+width: 36px;
+height: 36px;
+object-fit: contain;
+}
+
+.reboot-label {
+flex: 0 0 auto;
+max-width: 0;
+overflow: hidden;
+color: #89dda1;
+font-family: 'Share Tech Mono', monospace;
+font-size: 15px;
+letter-spacing: 2px;
+opacity: 0;
+transform: translateX(10px);
+transition: max-width 0.25s ease, opacity 0.15s ease, transform 0.25s ease;
+}
+
+.reboot-control:hover .reboot-label,
+.reboot-control:focus-visible .reboot-label {
+max-width: 82px;
+opacity: 1;
+transform: translateX(0);
+}
  
 @media(max-width:750px){
 body{
@@ -409,6 +467,11 @@ padding: 1rem 1rem 4rem;
 }
 .box{
 margin: 0;
+}
+
+.reboot-control {
+right: 10px;
+top: 115px;
 }
 }
 </style>
@@ -502,6 +565,10 @@ margin: 0;
       <ul class="updates-list">
         <li>
           <time datetime="2026-09-30">09/30/2026</time>
+          <p>Positioned the fixed Home Reboot control at top right, below the mobile nav when narrow, and switched it to the local ALTIMIT logo.</p>
+        </li>
+        <li>
+          <time datetime="2026-09-30">09/30/2026</time>
           <p>Reworked the boot branding to present VIGIL as an organization running on ALTIMIT OS.</p>
         </li>
         <li>
@@ -571,6 +638,10 @@ margin: 0;
 <div class="footerwrapper">.</div>
  
 <p id="credit">Theme by <a href="https://repth.neocities.org/index.html">Repth</a></p>
+<a class="reboot-control" href="/index.html" aria-label="Reboot to boot screen" title="Reboot to boot screen" onmouseenter="playHoverSound()" onclick="playCustomClickSound()">
+  <span class="reboot-label" aria-hidden="true">REBOOT</span>
+  <img class="reboot-icon" src="altimit-logo.png" alt="">
+</a>
 
 <!-- Audio & Ambient Scripts -->
 <script>
