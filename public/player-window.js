@@ -1,7 +1,7 @@
 (() => {
   const playerPath = "/webdeck-player/";
   const playerName = "WebDeckPlayer";
-  const playerFeatures = "popup,width=600,height=250,resizable=no,scrollbars=no";
+  const playerFeatures = "popup,width=640,height=340,resizable=no,scrollbars=no";
   const playerStateKey = "webDeckPlayerOpen";
   const channel = "BroadcastChannel" in window
     ? new BroadcastChannel("webDeckPlayer")
