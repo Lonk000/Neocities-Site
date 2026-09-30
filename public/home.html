@@ -124,10 +124,14 @@ z-index: 2;
 }
  
 .container{
-display: flex;
-flex-direction: column;
-padding: 3rem 3rem 5rem 3rem;
+display: grid;
+grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.8fr);
+grid-template-areas:
+  "about socials"
+  "updates todo";
 gap: 1.5rem;
+margin-left: 200px;
+padding: 3rem 3rem 5rem 0;
 position: relative;
 z-index: 1;
 }
@@ -135,9 +139,18 @@ z-index: 1;
 .box{
 background: rgba(255, 255, 255, 0.9);
 border: 5px ridge #51815d;
-margin-left: 200px;
+margin: 0;
 position: relative;
 z-index: 1;
+}
+
+.about-box { grid-area: about; }
+.socials-box { grid-area: socials; }
+.updates-box { grid-area: updates; }
+.todo-box { grid-area: todo; }
+.socials-box,
+.todo-box {
+align-self: start;
 }
  
 .content{
@@ -152,6 +165,47 @@ margin-bottom: 1rem;
 .content ul, .content ol {
 margin-left: 20px;
 margin-bottom: 1rem;
+}
+
+.social-links,
+.todo-list,
+.updates-list {
+display: flex;
+flex-direction: column;
+gap: 0.75rem;
+margin: 0;
+padding: 0;
+list-style: none;
+}
+
+.social-links li,
+.todo-list li,
+.updates-list li {
+padding: 0.75rem;
+border-left: 4px solid #51815d;
+background: rgba(81, 129, 93, 0.1);
+}
+
+.social-links a {
+color: #005f73;
+}
+
+.updates-list time {
+display: block;
+margin-bottom: 0.25rem;
+color: #555;
+font-size: 0.875rem;
+}
+
+.todo-list label {
+display: flex;
+align-items: flex-start;
+gap: 0.5rem;
+}
+
+.todo-list input {
+margin-top: 0.3rem;
+accent-color: #51815d;
 }
 
 .subheaders{
@@ -304,13 +358,23 @@ width: 100%;
 height: 15px;
 }
 .container{
-padding: 1rem 1rem 4rem 1rem;
+grid-template-columns: minmax(0, 1fr);
+grid-template-areas:
+  "about"
+  "socials"
+  "updates"
+  "todo";
+gap: 1rem;
+margin: 0;
+padding: 1rem 1rem 4rem;
 }
 .box{
 margin: 0;
 }
 }
 </style>
+  <link rel="stylesheet" href="window-controls.css">
+  <script src="window-controls.js" defer></script>
   </head>
  
 <body>
@@ -339,7 +403,7 @@ margin: 0;
 <a href="https://lonkofhyrool.neocities.org/blog" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/WeZ6fmy.png"><span>BLOG</span></a>
 <a href="https://lonkofhyrool.neocities.org/guestbook" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/KkJtAml.png"><span>GUESTBOOK</span></a>
 <a href="https://lonkofhyrool.neocities.org/credit" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/eZGAhVt.png"><span>SOURCES</span></a>
-<a href="https://lonkofhyrool.neocities.org/about" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/zKnelZI.png"><span>DATA</span></a>
+<a href="https://lonkofhyrool.neocities.org/data.html" onmouseenter="playHoverSound()" onclick="playCustomClickSound()"><img src="https://i.imgur.com/zKnelZI.png"><span>DATA</span></a>
 <a href="/webdeck-player/index.html" target="WebDeckPlayer" data-open-webdeck><img src="https://i.imgur.com/2SMR5ij.png"><span>PLAYER</span></a>
 </div>
  
@@ -349,7 +413,7 @@ margin: 0;
  
 <div class="container">
   <!-- BOX 1: ABOUT ME -->
-  <div class="box">
+  <div class="box about-box">
     <h3 class="subheaders">About Me!</h3>
     <div class="content">
       <img style="float:left;margin:0px 10px 10px 0px;width:230px;border:1px solid #97D9E9;" src="https://iili.io/F6Endej.jpg" alt="Profile Picture">
@@ -364,6 +428,49 @@ margin: 0;
       <h3>"There is no such thing as a worthless person, being born is more than enough" - Machida-kun</h3>
     </div>
   </div>
+
+  <section class="box socials-box" aria-labelledby="socials-title">
+    <h2 class="subheaders" id="socials-title">Socials</h2>
+    <div class="content">
+      <ul class="social-links">
+        <li>Discord: <strong>lonkofhyrool</strong></li>
+        <li><a href="https://www.instagram.com/lonkofhyrool" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="https://twitter.com/lonkofhyrool" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
+        <li><a href="https://www.twitch.tv/lonkofhyrool" target="_blank" rel="noopener noreferrer">Twitch</a></li>
+        <li><a href="https://open.spotify.com/playlist/2exFlWSu0Si4Q7dBoRzCvb" target="_blank" rel="noopener noreferrer">Spotify: Lonk's Sampler</a></li>
+        <li><a href="https://spacehey.com/lonk" target="_blank" rel="noopener noreferrer">SpaceHey</a></li>
+        <li><a href="https://lonkofhyrool.neocities.org/blog">Read the blog</a></li>
+        <li><a href="https://lonkofhyrool.neocities.org/guestbook">Sign the guestbook</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="box updates-box" aria-labelledby="updates-title">
+    <h2 class="subheaders" id="updates-title">Recent Updates</h2>
+    <div class="content">
+      <ul class="updates-list">
+        <li>
+          <time datetime="2026-09-29">September 29, 2026</time>
+          <p>Credits and music playlists are now together on the Sources page.</p>
+        </li>
+        <li>
+          <time datetime="2026-09-29">September 29, 2026</time>
+          <p>The home page now has dedicated socials, updates, and site to-do sections.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="box todo-box" aria-labelledby="todo-title">
+    <h2 class="subheaders" id="todo-title">Site To-Do</h2>
+    <div class="content">
+      <ul class="todo-list">
+        <li><label><input type="checkbox"> Add more playlists</label></li>
+        <li><label><input type="checkbox"> Post a new blog entry</label></li>
+        <li><label><input type="checkbox"> Add social profile links</label></li>
+      </ul>
+    </div>
+  </section>
 </div>
 
 <div class="footerwrapper">.</div>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sources - Lonk of Hyrool</title>
+    <title>Data &amp; Webring - Lonk of Hyrool</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
@@ -26,28 +26,27 @@
       .page-bg {
         position: fixed;
         inset: 0 0 0 50px;
+        z-index: 0;
         background: url('https://i.imgur.com/CrmWR1m.png') no-repeat center center;
         background-size: cover;
-        z-index: 0;
       }
 
       body::before {
-        content: " ";
-        display: block;
         position: fixed;
+        z-index: 999;
         inset: 0;
         background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-        z-index: 999;
         background-size: 100% 4px, 6px 100%;
+        content: " ";
         pointer-events: none;
       }
 
       .sidewrapper {
         position: fixed;
-        left: 0;
-        top: 0;
-        height: 100%;
         z-index: 4;
+        top: 0;
+        left: 0;
+        height: 100%;
       }
 
       .sidewrapper2 {
@@ -91,6 +90,7 @@
 
       .side1 a:hover {
         color: #97D9E9;
+        font-weight: normal;
         text-shadow: 0 0 5px #fff;
       }
 
@@ -158,18 +158,23 @@
         margin-bottom: 1rem;
       }
 
-      .content ul {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        margin: 0 0 1rem;
-        list-style: none;
+      .ring-badge {
+        display: inline-flex;
+        max-width: 100%;
+        padding: 6px;
+        border: 1px solid #51815d;
+        background: rgba(81, 129, 93, 0.1);
       }
 
-      .content li {
-        padding: 10px 15px;
-        border-left: 4px solid #51815d;
-        background: rgba(81, 129, 93, 0.1);
+      .ring-badge img {
+        display: block;
+        width: 200px;
+        max-width: 100%;
+        height: auto;
+      }
+      .ring-caption {
+        margin-top: 0.5rem;
+        font-size: 9px;
       }
 
       a {
@@ -179,11 +184,6 @@
 
       a:hover {
         font-weight: bold;
-      }
-
-      .side1 a:hover {
-        color: #97D9E9;
-        font-weight: normal;
       }
 
       .footerwrapper {
@@ -279,59 +279,42 @@
         }
       }
     </style>
-  <link rel="stylesheet" href="window-controls.css">
-  <script src="window-controls.js" defer></script>
+    <link rel="stylesheet" href="window-controls.css">
+    <script src="window-controls.js" defer></script>
   </head>
   <body>
     <div class="page-bg"></div>
 
     <div class="headerwrapper">
-      <h1 class="header">sources</h1>
+      <h1 class="header">data</h1>
       <div class="headerborder"></div>
     </div>
 
     <div class="sidewrapper">
       <div class="sidewrapper2">
         <div class="side1">
-          <a href="https://lonkofhyrool.neocities.org/home.html" onmouseenter="playHoverSound()" onclick="playClickSound(); openWebDeckPlayer()"><img src="https://i.imgur.com/FM4JrM1.png"><span>HOME</span></a>
-          <a href="https://lonkofhyrool.neocities.org/blog" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/WeZ6fmy.png"><span>BLOG</span></a>
-          <a href="https://lonkofhyrool.neocities.org/guestbook" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/KkJtAml.png"><span>GUESTBOOK</span></a>
-          <a href="https://lonkofhyrool.neocities.org/credit" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/eZGAhVt.png"><span>SOURCES</span></a>
-          <a href="https://lonkofhyrool.neocities.org/data.html" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/zKnelZI.png"><span>DATA</span></a>
-          <a href="/webdeck-player/index.html" target="WebDeckPlayer" data-open-webdeck><img src="https://i.imgur.com/2SMR5ij.png"><span>PLAYER</span></a>
+          <a href="https://lonkofhyrool.neocities.org/home.html" onmouseenter="playHoverSound()" onclick="playClickSound(); openWebDeckPlayer()"><img src="https://i.imgur.com/FM4JrM1.png" alt=""><span>HOME</span></a>
+          <a href="https://lonkofhyrool.neocities.org/blog" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/WeZ6fmy.png" alt=""><span>BLOG</span></a>
+          <a href="https://lonkofhyrool.neocities.org/guestbook" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/KkJtAml.png" alt=""><span>GUESTBOOK</span></a>
+          <a href="https://lonkofhyrool.neocities.org/credit" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/eZGAhVt.png" alt=""><span>SOURCES</span></a>
+          <a href="https://lonkofhyrool.neocities.org/data.html" onmouseenter="playHoverSound()" onclick="playClickSound()"><img src="https://i.imgur.com/zKnelZI.png" alt=""><span>DATA</span></a>
+          <a href="/webdeck-player/index.html" target="WebDeckPlayer" data-open-webdeck><img src="https://i.imgur.com/2SMR5ij.png" alt=""><span>PLAYER</span></a>
         </div>
         <div class="side2"></div>
       </div>
     </div>
 
     <div class="container">
-      <div class="box">
-        <h2 class="subheaders">Project Attributions &amp; Credits</h2>
+      <section class="box" aria-labelledby="webring-title">
+        <h2 class="subheaders" id="webring-title">Webring</h2>
         <div class="content">
-          <p>This site makes use of or draws inspiration from the following open projects, resources, and creators:</p>
-          <ul>
-            <li><strong>Repth:</strong> Theme framework and layout (<a href="https://repth.neocities.org/" target="_blank">repth.neocities.org</a>)</li>
-            <li><strong>Zoner2000:</strong> "A drag and drop static site generator for making Zonelets-style blogs!" (<a href="https://github.com/GwyndolynMarchant/zoner2000" target="_blank">Zoner2000</a> / <a href="https://www.shadenexus.ca/" target="_blank">Gwyn</a> | <a href="https://x.com/aynik_co" target="_blank">Ryan Trawick, the Original dev</a>)</li>
-          </ul>
-          <hr style="border: 0; border-top: 1px solid #ccc; margin: 1.5rem 0;">
-          <p><em>Thank you to all open creators and developers who keep the independent web vibrant and inspiring!</em></p>
+          <p>check out these sites!</p>
+          <a class="ring-badge" href="https://ssmrk.dothome.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Visit the webring site">
+            <img src="https://ssmrk.dothome.co.kr/img/bn.png" alt="Webring banner">
+          </a>
+          <p class="ring-caption">This is a friend I made trying to find people who played Double Cross 3rd Edition, they're from Korea!</p>
         </div>
-      </div>
-
-      <div class="box">
-        <h2 class="subheaders">Music Sources</h2>
-        <div class="content">
-          <p>A collection of music and playlists featured across the site:</p>
-          <ul>
-            <li><a href="https://www.youtube.com/playlist?list=PLGM8jlqEpx28" target="_blank">Playlist 1</a><br><small style="color: #555; word-break: break-all;">Natsume Playlist</small></li>
-            <li><a href="https://www.youtube.com/playlist?list=PL6VKYupomQTOwGK6MLNT17pUvD5GaPiSx" target="_blank">Playlist 2</a><br><small style="color: #555; word-break: break-all;">Relaxing Zelda Music</small></li>
-            <li><a href="https://www.youtube.com/playlist?list=PL06QyxlYtKLUbo_aGfF3qKx9FHh-Uuoq_" target="_blank">Playlist 3</a><br><small style="color: #555; word-break: break-all;">Persona Relax and Chill Mix</small></li>
-            <li><a href="https://www.youtube.com/playlist?list=PLF4bRxcwJEfEl1DrfOaLWyQ-kIAz8wDSW" target="_blank">Playlist 4</a><br><small style="color: #555; word-break: break-all;">Whirling in Rags</small></li>
-          </ul>
-          <hr style="border: 0; border-top: 1px solid #ccc; margin: 1.5rem 0;">
-          <p><em>Enjoy the tunes!</em></p>
-        </div>
-      </div>
+      </section>
     </div>
 
     <div class="footerwrapper"></div>
