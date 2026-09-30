@@ -43,7 +43,7 @@ The script replaces `blog-zone-built/` and `public/blog/` on each run. Treat bot
 
 ## Customize the Blog
 
-- `blog-zone/index_My Notebook.md` controls the blog landing page and recent-post list.
+- `blog-zone/index_My Notebook.md` controls the blog landing page, recent-post list, and the RSS/Archive shortcut panel.
 - `blog-zone/archive.md` controls the full archive page.
 - `blog-zone/header.md` controls the blog navigation and RSS metadata.
 - `blog-zone/footer.md` controls the footer shared by generated pages.
