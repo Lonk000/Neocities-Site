@@ -197,6 +197,45 @@ color: #555;
 font-size: 0.875rem;
 }
 
+.updates-toolbar {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: space-between;
+gap: 0.75rem;
+margin-bottom: 1rem;
+}
+
+.updates-page-size,
+.updates-pagination {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.updates-page-size select,
+.updates-pagination button {
+padding: 0.35rem 0.5rem;
+border: 2px ridge #51815d;
+border-radius: 0;
+background: rgba(81, 129, 93, 0.12);
+color: #111;
+font: inherit;
+}
+
+.updates-pagination button {
+cursor: pointer;
+}
+
+.updates-pagination button:disabled {
+cursor: default;
+opacity: 0.5;
+}
+
+.updates-page-status {
+font-size: 0.875rem;
+}
+
 .todo-list label {
 display: flex;
 align-items: flex-start;
@@ -375,6 +414,7 @@ margin: 0;
 </style>
   <link rel="stylesheet" href="window-controls.css">
   <script src="window-controls.js" defer></script>
+  <script src="changelog.js" defer></script>
   </head>
  
 <body>
@@ -445,17 +485,63 @@ margin: 0;
     </div>
   </section>
 
-  <section class="box updates-box" aria-labelledby="updates-title">
+  <section class="box updates-box" aria-labelledby="updates-title" data-changelog>
     <h2 class="subheaders" id="updates-title">Recent Updates</h2>
     <div class="content">
+      <div class="updates-toolbar">
+        <label class="updates-page-size">Entries per page
+          <select data-page-size aria-label="Entries per page">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+          </select>
+        </label>
+        <nav class="updates-pagination" aria-label="Recent updates pages">
+          <button type="button" data-page-previous disabled>Previous</button>
+          <span class="updates-page-status" data-page-status aria-live="polite"></span>
+          <button type="button" data-page-next>Next</button>
+        </nav>
+      </div>
       <ul class="updates-list">
         <li>
-          <time datetime="2026-09-29">September 29, 2026</time>
-          <p>Credits and music playlists are now together on the Sources page.</p>
+          <time datetime="2026-09-29">09/29/2026</time>
+          <p>Recent Updates now works as a paginated changelog, with 5, 10, or 25 entries per page.</p>
         </li>
         <li>
-          <time datetime="2026-09-29">September 29, 2026</time>
-          <p>The home page now has dedicated socials, updates, and site to-do sections.</p>
+          <time datetime="2026-09-29">09/29/2026</time>
+          <p>Added minimize, maximize, and close controls to the site's content boxes and blog entries.</p>
+        </li>
+        <li>
+          <time datetime="2026-09-29">09/29/2026</time>
+          <p>Added a Data page with the webring banner and its caption.</p>
+        </li>
+        <li>
+          <time datetime="2026-09-29">09/29/2026</time>
+          <p>Added Instagram, Twitter/X, Twitch, Spotify, and SpaceHey links to the Home page.</p>
+        </li>
+        <li>
+          <time datetime="2026-09-29">09/29/2026</time>
+          <p>Expanded Home with Socials, Recent Updates, and Site To-Do panels.</p>
+        </li>
+        <li>
+          <time datetime="2026-09-29">09/29/2026</time>
+          <p>Combined music playlists and credits on Sources; the old Audio address redirects there.</p>
+        </li>
+        <li>
+          <time datetime="2026-09-29">09/29/2026</time>
+          <p>Added a shared WebDeck player launcher to Connect and the site navigation.</p>
+        </li>
+        <li>
+          <time datetime="2026-09-29">09/29/2026</time>
+          <p>Matched the Home About Me box styling to the site's other content boxes.</p>
+        </li>
+        <li>
+          <time datetime="2026-09-29">09/29/2026</time>
+          <p>Standardized sidebar labels to 25px across the themed pages.</p>
+        </li>
+        <li>
+          <time datetime="2026-09-29">09/29/2026</time>
+          <p>Matched the Audio and Sources sidebar spacing and label styling with the rest of the site.</p>
         </li>
       </ul>
     </div>
