@@ -2,6 +2,7 @@ body::before {
   background:
     linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.20) 50%),
     linear-gradient(90deg, rgba(255, 0, 0, 0.016), rgba(0, 255, 0, 0.008), rgba(0, 0, 255, 0.016));
+  background-size: 100% 4px, 6px 100%;
 }
 
 a,
@@ -14,12 +15,12 @@ a:active,
 .side1 a:active {
   color: #89dda1 !important;
   text-shadow:
-    -1px -1px 0 #000,
-    0 -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 0 0 #000,
-    1px 0 0 #000,
-    -1px 1px 0 #000,
-    0 1px 0 #000,
-    1px 1px 0 #000;
+    -0.5px -0.5px 0 #000,
+    0 -0.5px 0 #000,
+    0.5px -0.5px 0 #000,
+    -0.5px 0 0 #000,
+    0.5px 0 0 #000,
+    -0.5px 0.5px 0 #000,
+    0 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
 }

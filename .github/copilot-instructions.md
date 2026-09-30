@@ -10,7 +10,7 @@
 - Keep links, asset references, and navigation consistent with the existing static URL structure. Use paths that work when `public/` is the published root.
 - Make focused edits and retain the site's retro/DIY visual character and responsive behavior.
 - Avoid adding dependencies, build tooling, or generated files for simple HTML, CSS, and JavaScript changes.
-- Whenever site content, styling, behavior, or assets change, add a newest-first entry to the Recent Updates changelog in `public/home.html`, dated `MM/DD/YYYY`. Preserve prior entries; the changelog pagination controls its page count.
+- Whenever site content, styling, behavior, or assets change, add a newest-first entry to the Recent Updates changelog in `public/home.html`, dated `MM/DD/YYYY`. Consolidate changes made in quick succession or affecting the same page or feature into one entry instead of logging each small step. Preserve earlier history; the changelog pagination controls its page count.
 
 ## Validation
 - No automated test or build command is configured. For static page changes, inspect the edited markup and CSS, check local asset paths and links, and preview the affected page in a browser when available.
