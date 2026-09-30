@@ -8,12 +8,19 @@ body::before {
 a,
 a:visited,
 a:hover,
-a:active,
+a:active {
+  color: #89dda1 !important;
+  -webkit-text-stroke: 0.5px #000;
+  text-shadow: none !important;
+}
+
 .side1 a,
 .side1 a:visited,
 .side1 a:hover,
 .side1 a:active {
   color: #89dda1 !important;
+  -webkit-text-stroke: 0;
+  text-shadow: 3px 3px 0 #51815d !important;
 }
 
 .header {
