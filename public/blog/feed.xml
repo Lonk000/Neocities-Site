@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>	<title>Lonk of Hyrool Blog</title>
+	<description>Notes and posts from Lonk of Hyrool.</description>
+	<link>https://lonkofhyrool.neocities.org/blog/</link>
+	<atom:link href="https://lonkofhyrool.neocities.org/blog/" rel="self"></atom:link>
+	<language>en</language>
+	<lastBuildDate>
+Wed, 30 Sep 2026 06:02:58 +0000
+</lastBuildDate>
+	<ttl>1440</ttl>
+
+	<item>
+		<title>Entry Title 2</title>
+		<description>Here's another blog entry. Keep adding more as you write!</description>
+		<link>https://lonkofhyrool.neocities.org/blog/posts/2025-08-03-entry-title-2.html</link>
+		<pubDate>
+			Sun, 03 Aug 2025 00:00:00 +0000
+		</pubDate>
+	</item>
+
+	<item>
+		<title>Entry Title 1</title>
+		<description>This is a sample blog post. You can talk about your day, share thoughts, or anything you want!</description>
+		<link>https://lonkofhyrool.neocities.org/blog/posts/2025-08-04-entry-title-1.html</link>
+		<pubDate>
+			Mon, 04 Aug 2025 00:00:00 +0000
+		</pubDate>
+	</item>
+
+</channel>
+</rss>
