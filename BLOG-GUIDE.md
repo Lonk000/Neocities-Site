@@ -22,6 +22,17 @@ The blog uses Zoner2000 to turn Markdown source files into a static site under `
 
 3. Save the file. The archive and RSS feed are generated automatically during the build.
 
+4. Add the comments and reactions widgets at the end of each post so each article gets its own thread and reactions:
+
+   ```html
+   <div class="post-widgets">
+     <ws-widget type="reactions" iid="17128"></ws-widget>
+     <ws-widget type="comments" iid="17127"></ws-widget>
+   </div>
+   ```
+
+   Keep these instance IDs the same on every post. Comments use the current page path and query as the thread key by default, so each generated post gets a separate thread. The build script adds WidgetStar's loader script to the `<head>` of every generated blog page automatically; don't add another loader tag to individual posts.
+
 ## Build and Preview
 
 From the Site folder, run `build-blog.cmd` (double-click it, or run `& .\build-blog.cmd` in PowerShell). The script runs the bundled Zoner2000 executable, then replaces and regenerates `public/blog/`.
@@ -36,7 +47,7 @@ The script replaces `blog-zone-built/` and `public/blog/` on each run. Treat bot
 - `blog-zone/archive.md` controls the full archive page.
 - `blog-zone/header.md` controls the blog navigation and RSS metadata.
 - `blog-zone/footer.md` controls the footer shared by generated pages.
-- `blog-zone/style/style.css` controls blog presentation. It imports the site's shared visual overrides and window controls.
+- `blog-zone/style/style.css` controls blog presentation, including the shared responsive site sidebar and spacing around post widgets. It imports the site's shared visual overrides and window controls.
 
 Change the header, footer, or stylesheet, then rebuild with `build-blog.cmd` to refresh the generated pages. Keep the header links pointed at the main site's pages, such as `/home.html`, `/guestbook.html`, `/credit.html`, and `/data.html`.
 

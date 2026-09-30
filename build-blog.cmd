@@ -31,4 +31,7 @@ mkdir "%PUBLISHED_BLOG%"
 xcopy "%GENERATED_BLOG%\*" "%PUBLISHED_BLOG%\" /e /i /y >nul
 if errorlevel 1 exit /b 1
 
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%SITE_ROOT%inject-blog-widget-script.ps1" -BlogRoot "%PUBLISHED_BLOG%"
+if errorlevel 1 exit /b 1
+
 echo Blog built and copied to "%PUBLISHED_BLOG%".

@@ -24,33 +24,68 @@ body {
 }
 
 #header {
-  margin-top: 25px;
-  padding: 1rem 1.5rem;
-  border-bottom: 3px ridge #51815d;
-  background: rgba(0, 0, 0, 0.85);
-  color: #fff;
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
-.blog-brand {
-  display: inline-block;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  font-size: 24px;
-  text-decoration: none;
-}
-
-#header nav {
+#header .sidewrapper2 {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
-  margin-top: 0.5rem;
+  height: 100%;
 }
 
-#header nav a {
-  color: #89dda1;
+#header .side1 {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  height: 100%;
+  padding: 1.5rem 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #000;
   font-family: "PT Sans Narrow", sans-serif;
-  font-size: 18px;
+  font-size: 25px;
+  text-align: center;
+}
+
+#header .side1 a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+  color: #fff;
   text-decoration: none;
+}
+
+#header .side1 img {
+  height: auto;
+}
+
+#header .side1 span {
+  margin-top: 2px;
+  font-family: "PT Sans Narrow", sans-serif;
+  font-size: 25px;
+}
+
+#header .side1 a:hover {
+  color: #97D9E9;
+  font-weight: normal;
+  text-shadow: 0 0 5px #fff;
+}
+
+#header .side2 {
+  width: 50px;
+  height: 100%;
+  background: #000;
+  opacity: 0.7;
 }
 
 #container {
@@ -113,6 +148,12 @@ body {
   border-top: 1px solid #51815d;
 }
 
+.post-widgets {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
 #footer {
   padding: 0 3rem 4rem 0;
   color: #fff;
@@ -124,15 +165,54 @@ body {
 }
 
 @media (max-width: 750px) {
-  #header,
   #container,
   #footer {
     margin-left: 0;
   }
 
   #header {
-    margin-top: 0;
-    padding: 1rem;
+    position: sticky;
+    z-index: 5;
+    top: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  #header .sidewrapper2 {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+
+  #header .side1 {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    gap: 10px;
+    padding: 0.5rem 0.25rem;
+  }
+
+  #header .side1 a {
+    flex-direction: row;
+    gap: 4px;
+    padding: 0;
+  }
+
+  #header .side1 img {
+    width: 20px;
+    height: 20px;
+  }
+
+  #header .side1 span {
+    margin: 0;
+  }
+
+  #header .side2 {
+    width: 100%;
+    height: 15px;
   }
 
   #container {
