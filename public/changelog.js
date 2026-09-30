@@ -2,12 +2,13 @@
   const changelog = document.querySelector("[data-changelog]");
   if (!changelog) return;
 
-  const entries = [...changelog.querySelectorAll(".updates-list > li")];
+  const updatesList = changelog.querySelector("[data-updates-list]");
   const pageSizeSelect = changelog.querySelector("[data-page-size]");
   const previousButton = changelog.querySelector("[data-page-previous]");
   const nextButton = changelog.querySelector("[data-page-next]");
   const pageStatus = changelog.querySelector("[data-page-status]");
   let currentPage = 1;
+  let entries = [];
 
   const renderPage = () => {
     const pageSize = Number(pageSizeSelect.value);
@@ -40,5 +41,45 @@
     renderPage();
   });
 
-  renderPage();
+  const loadEntries = async () => {
+    try {
+      const response = await fetch("updates.md");
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const markdown = await response.text();
+      const fragment = document.createDocumentFragment();
+
+      markdown.split(/\r?\n/).forEach((line) => {
+        const match = line.match(/^\s*-\s+(\d{2})\/(\d{2})\/(\d{4}):\s+(.+?)\s*$/);
+        if (!match) return;
+
+        const [, month, day, year, description] = match;
+        const item = document.createElement("li");
+        const date = document.createElement("time");
+        const text = document.createElement("p");
+
+        date.dateTime = `${year}-${month}-${day}`;
+        date.textContent = `${month}/${day}/${year}`;
+        text.textContent = description;
+        item.append(date, text);
+        fragment.append(item);
+      });
+
+      entries = [...fragment.children];
+      if (!entries.length) throw new Error("No valid changelog entries found");
+
+      updatesList.replaceChildren(fragment);
+      renderPage();
+    } catch (error) {
+      const item = document.createElement("li");
+      item.textContent = "Recent updates could not be loaded.";
+      updatesList.replaceChildren(item);
+      previousButton.disabled = true;
+      nextButton.disabled = true;
+      pageStatus.textContent = "Updates unavailable";
+      console.error("Unable to load Recent Updates.", error);
+    }
+  };
+
+  loadEntries();
 })();
