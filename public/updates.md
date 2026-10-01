@@ -1,6 +1,6 @@
 # Recent Updates
 
-- 10/01/2026: Designed and added the custom ALTIMIT OS theme for the WebDeck player matching the site terminal aesthetic.
+- 10/01/2026: Designed and added the custom ALTIMIT OS theme for the WebDeck.
 - 09/30/2026: Docked WebDeck player in the bottom right corner, backed by PJAX navigation across the site.
 - 09/30/2026: Integrated the Zoner2000 Markdown blog under /blog with a shared responsive sidebar, RSS/Archive shortcuts, a build guide, and per-post WidgetStar comments/reactions.
 - 09/29/2026: Kept Socials focused and consolidated related changelog entries.
