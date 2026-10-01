@@ -142,9 +142,19 @@ function onYouTubeIframeAPIReady() {
     },
     events: {
         'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
+        'onStateChange': onPlayerStateChange,
+        'onError': onPlayerError
     }
     });
+}
+
+function onPlayerError(event) {
+    console.warn("YouTube player encountered error " + event.data + ", advancing to next playable track...");
+    setTimeout(function() {
+        if (player && typeof player.nextVideo === "function") {
+            player.nextVideo();
+        }
+    }, 600);
 }
 
 function updateSongLabel() {
@@ -312,10 +322,19 @@ infoButton.addEventListener("click", function() {
     alert("Webdeck Player - created by Chris\ngithub.com/cristiancfm/webdeck-player\n(c) MIT License");
 });
 
+function loadPlaylistOrTrack(target) {
+    if (typeof target === 'string' && target.startsWith('PL')) {
+        player.loadPlaylist({ list: target, listType: 'playlist' });
+    } else {
+        var list = Array.isArray(target) ? target : [target];
+        player.loadPlaylist(list);
+    }
+}
+
 playlistSelector.addEventListener("change", function() {
     currentPlaylist = playlistSelector.value;
     player.stopVideo();
-    player.loadPlaylist({ list: myPlaylists[currentPlaylist] });
+    loadPlaylistOrTrack(myPlaylists[currentPlaylist]);
 });
 
 themeSelector.addEventListener("change", function() {
@@ -336,7 +355,7 @@ themeSelector.addEventListener("change", function() {
 
 
 function onPlayerReady(event) {
-    player.loadPlaylist({ list: myPlaylists[currentPlaylist] });
+    loadPlaylistOrTrack(myPlaylists[currentPlaylist]);
     player.setVolume(50);
     player.setLoop(true);
     player.playVideo();

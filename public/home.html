@@ -129,6 +129,7 @@ grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.8fr);
 grid-template-areas:
   "about socials"
   "updates todo";
+align-items: start;
 gap: 1.5rem;
 margin-left: 200px;
 padding: 3rem 3rem 5rem 0;
@@ -142,16 +143,13 @@ border: 5px ridge #51815d;
 margin: 0;
 position: relative;
 z-index: 1;
+align-self: start;
 }
 
 .about-box { grid-area: about; }
 .socials-box { grid-area: socials; }
 .updates-box { grid-area: updates; }
 .todo-box { grid-area: todo; }
-.socials-box,
-.todo-box {
-align-self: start;
-}
  
 .content{
 padding: 1.5rem;
@@ -607,7 +605,7 @@ margin: 0;
     </div>
   </div>
   <div class="webdeck-dock-body">
-    <iframe id="webdeck-iframe" src="/webdeck-player/index.html" title="WebDeck Player" allow="autoplay"></iframe>
+    <iframe id="webdeck-iframe" src="/webdeck-player/index.html?v=altimit" title="WebDeck Player" allow="autoplay"></iframe>
   </div>
 </div>
 

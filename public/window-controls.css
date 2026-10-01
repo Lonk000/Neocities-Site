@@ -46,6 +46,16 @@
   background: #a94339;
 }
 
+.site-window.is-minimized {
+  align-self: start !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.site-window.is-minimized .window-heading {
+  border-bottom: none !important;
+}
+
 .site-window.is-minimized > :not(.window-heading) {
   display: none !important;
 }
