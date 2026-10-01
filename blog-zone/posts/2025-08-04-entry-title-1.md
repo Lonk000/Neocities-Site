@@ -1,4 +1,4 @@
-This is a sample blog post. You can talk about your day, share thoughts, or anything you want!
+This is a placeholder post, I'll put more stuff here once I actually write them lol.
 
 <div class="post-widgets">
 	<ws-widget type="reactions" iid="17128"></ws-widget>

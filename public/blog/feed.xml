@@ -6,22 +6,13 @@
 	<atom:link href="https://lonkofhyrool.neocities.org/blog/" rel="self"></atom:link>
 	<language>en</language>
 	<lastBuildDate>
-Thu, 01 Oct 2026 05:53:18 +0000
+Thu, 01 Oct 2026 10:07:11 +0000
 </lastBuildDate>
 	<ttl>1440</ttl>
 
 	<item>
-		<title>Entry Title 2</title>
-		<description>Here's another blog entry. Keep adding more as you write!</description>
-		<link>https://lonkofhyrool.neocities.org/blog/posts/2025-08-03-entry-title-2.html</link>
-		<pubDate>
-			Sun, 03 Aug 2025 00:00:00 +0000
-		</pubDate>
-	</item>
-
-	<item>
 		<title>Entry Title 1</title>
-		<description>This is a sample blog post. You can talk about your day, share thoughts, or anything you want!</description>
+		<description>This is a placeholder post, I'll put more stuff here once I actually write them lol.</description>
 		<link>https://lonkofhyrool.neocities.org/blog/posts/2025-08-04-entry-title-1.html</link>
 		<pubDate>
 			Mon, 04 Aug 2025 00:00:00 +0000
