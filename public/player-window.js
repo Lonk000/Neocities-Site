@@ -69,7 +69,7 @@
       dock.className = "webdeck-dock dock-hidden-init";
       dock.setAttribute("aria-label", "WebDeck Audio Player");
       dock.innerHTML = `
-        <div class="webdeck-dock-header" id="webdeck-dock-toggle" role="button" tabindex="0" aria-expanded="true" title="Click to minimize or restore player">
+        <div class="webdeck-dock-header" id="webdeck-dock-toggle" role="button" tabindex="0" aria-expanded="true" title="Click to minimize player">
           <div class="dock-title-group">
             <span class="dock-indicator" aria-hidden="true"></span>
             <span class="dock-label">AUDIO DECK</span>
@@ -84,20 +84,6 @@
         </div>
       `;
       document.body.appendChild(dock);
-
-      const header = dock.querySelector("#webdeck-dock-toggle");
-      const btn = dock.querySelector("#webdeck-dock-btn");
-
-      header?.addEventListener("click", () => {
-        const isMinimized = dock.classList.contains("dock-minimized");
-        setDockState(dock, !isMinimized);
-      });
-
-      btn?.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const isMinimized = dock.classList.contains("dock-minimized");
-        setDockState(dock, !isMinimized);
-      });
     }
     return dock;
   }
@@ -105,6 +91,7 @@
   function setDockState(dock, isMinimized) {
     const toggleBtn = dock.querySelector("#webdeck-dock-btn");
     const header = dock.querySelector(".webdeck-dock-header");
+    const isMobile = window.matchMedia && window.matchMedia("(max-width: 750px)").matches;
 
     dock.classList.remove("dock-hidden-init");
 
@@ -112,28 +99,37 @@
       dock.classList.remove("dock-expanded");
       dock.classList.add("dock-minimized");
       if (toggleBtn) {
-        toggleBtn.textContent = "▲";
+        toggleBtn.textContent = isMobile ? "◀" : "▲";
         toggleBtn.setAttribute("aria-label", "Restore Player");
         toggleBtn.title = "Restore";
       }
       header?.setAttribute("aria-expanded", "false");
-      localStorage.setItem(DOCK_STORAGE_KEY, "minimized");
+      header?.setAttribute("title", "Click to restore player");
+      try {
+        localStorage.setItem(DOCK_STORAGE_KEY, "minimized");
+      } catch (e) {}
     } else {
       dock.classList.remove("dock-minimized");
       dock.classList.add("dock-expanded");
       if (toggleBtn) {
-        toggleBtn.textContent = "−";
+        toggleBtn.textContent = isMobile ? "▶" : "−";
         toggleBtn.setAttribute("aria-label", "Minimize Player");
         toggleBtn.title = "Minimize";
       }
       header?.setAttribute("aria-expanded", "true");
-      localStorage.setItem(DOCK_STORAGE_KEY, "expanded");
+      header?.setAttribute("title", "Click to minimize player");
+      try {
+        localStorage.setItem(DOCK_STORAGE_KEY, "expanded");
+      } catch (e) {}
     }
   }
 
   function initDock() {
     const dock = ensureDock();
-    const savedState = localStorage.getItem(DOCK_STORAGE_KEY);
+    let savedState = null;
+    try {
+      savedState = localStorage.getItem(DOCK_STORAGE_KEY);
+    } catch (e) {}
 
     if (savedState === "minimized") {
       setDockState(dock, true);
@@ -152,6 +148,12 @@
     return true;
   };
 
+  window.minimizeWebDeckPlayer = () => {
+    const dock = ensureDock();
+    setDockState(dock, true);
+    return true;
+  };
+
   window.toggleWebDeckPlayer = () => {
     const dock = ensureDock();
     const isMinimized = dock.classList.contains("dock-minimized");
@@ -159,12 +161,38 @@
     return true;
   };
 
-  // Launch / toggle dock when clicking any [data-open-webdeck] link
+  // Delegated click handler for Dock header, minimize button, and sidebar launcher
   document.addEventListener("click", (event) => {
-    const launcher = event.target.closest("[data-open-webdeck]");
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+
+    // Check if clicked the minimize button or dock header bar
+    const dockToggle = target.closest("#webdeck-dock-btn, #webdeck-dock-toggle");
+    if (dockToggle) {
+      event.preventDefault();
+      event.stopPropagation();
+      window.toggleWebDeckPlayer();
+      return;
+    }
+
+    // Check if clicked the sidebar [data-open-webdeck] launcher
+    const launcher = target.closest("[data-open-webdeck]");
     if (launcher) {
       event.preventDefault();
+      event.stopPropagation();
       window.toggleWebDeckPlayer();
+      return;
+    }
+  });
+
+  // Keyboard support (Enter/Space on dock header)
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      const target = event.target instanceof Element ? event.target : null;
+      if (target?.closest("#webdeck-dock-toggle, #webdeck-dock-btn")) {
+        event.preventDefault();
+        window.toggleWebDeckPlayer();
+      }
     }
   });
 
