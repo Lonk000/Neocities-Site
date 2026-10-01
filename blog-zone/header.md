@@ -7,7 +7,7 @@
 
 <div class="sidewrapper2">
   <nav class="side1" aria-label="Site navigation">
-    <a href="/home.html" onclick="openWebDeckPlayer()"><img src="https://i.imgur.com/FM4JrM1.png" alt=""><span>HOME</span></a>
+    <a href="/home.html"><img src="https://i.imgur.com/FM4JrM1.png" alt=""><span>HOME</span></a>
     <a href="/blog/"><img src="https://i.imgur.com/WeZ6fmy.png" alt=""><span>BLOG</span></a>
     <a href="/guestbook.html"><img src="https://i.imgur.com/KkJtAml.png" alt=""><span>GUESTBOOK</span></a>
     <a href="/credit.html"><img src="https://i.imgur.com/eZGAhVt.png" alt=""><span>SOURCES</span></a>

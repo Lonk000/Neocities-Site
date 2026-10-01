@@ -1,5 +1,6 @@
 # Recent Updates
 
+- 09/30/2026: Docked WebDeck player in the bottom right corner, backed by PJAX navigation across the site.
 - 09/30/2026: Integrated the Zoner2000 Markdown blog under /blog with a shared responsive sidebar, RSS/Archive shortcuts, a build guide, and per-post WidgetStar comments/reactions.
 - 09/29/2026: Kept Socials focused and consolidated related changelog entries.
 - 09/29/2026: Recent Updates became a dated, paginated changelog with 5, 10, or 25 entries per page.

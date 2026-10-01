@@ -1,51 +1,329 @@
 (() => {
-  const playerPath = "/webdeck-player/";
-  const playerName = "WebDeckPlayer";
-  const playerFeatures = "popup,width=640,height=340,resizable=no,scrollbars=no";
-  const playerStateKey = "webDeckPlayerOpen";
-  const sidebarClickAudio = document.getElementById("click-audio")
-    ?? new Audio("/sounds/click.mp3");
-  const channel = "BroadcastChannel" in window
-    ? new BroadcastChannel("webDeckPlayer")
-    : null;
-
-  if (/\/webdeck-player\/(?:index\.html)?$/.test(window.location.pathname)) {
-    localStorage.setItem(playerStateKey, "open");
-    window.addEventListener("pagehide", () => {
-      localStorage.removeItem(playerStateKey);
-    }, { once: true });
-    channel?.addEventListener("message", (event) => {
-      if (event.data === "focus") window.focus();
-    });
+  // If we are inside the standalone webdeck-player or on the boot splash screen, don't mount the dock
+  const path = window.location.pathname;
+  if (
+    /\/webdeck-player\/(?:index\.html)?$/.test(path) ||
+    path === "/" ||
+    /\/index\.html$/.test(path)
+  ) {
+    window.openWebDeckPlayer = () => true;
+    window.toggleWebDeckPlayer = () => true;
     return;
   }
 
-  window.openWebDeckPlayer = () => {
-    if (localStorage.getItem(playerStateKey) === "open") {
-      channel?.postMessage("focus");
-      return true;
+  const DOCK_STORAGE_KEY = "webdeck_dock_state";
+  const clickAudio = document.getElementById("click-audio") ?? new Audio("/sounds/click.mp3");
+  const clickTargetSelector = "a[href], button, input:not([type='hidden']), select, textarea, summary, [role='button'], [data-window-action]";
+
+  // Global sound synthesizer functions for hover and click
+  window.playHoverSound = window.playHoverSound || function() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(300, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(500, ctx.currentTime + 0.05);
+      gain.gain.setValueAtTime(0.03, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.05);
+    } catch (e) {}
+  };
+
+  window.playClickSound = window.playClickSound || function() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "square";
+      osc.frequency.setValueAtTime(520, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(180, ctx.currentTime + 0.06);
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.06);
+    } catch (e) {}
+  };
+
+  // Delegated sound effect for interactive clicks
+  document.addEventListener("click", (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target?.closest(clickTargetSelector)) return;
+    clickAudio.currentTime = 0;
+    clickAudio.play().catch(() => {});
+  }, true);
+
+  // =========================================
+  // WEBDECK DOCK CONTROLLER
+  // =========================================
+  function ensureDock() {
+    let dock = document.getElementById("webdeck-dock");
+    if (!dock) {
+      dock = document.createElement("div");
+      dock.id = "webdeck-dock";
+      dock.className = "webdeck-dock dock-hidden-init";
+      dock.setAttribute("aria-label", "WebDeck Audio Player");
+      dock.innerHTML = `
+        <div class="webdeck-dock-header" id="webdeck-dock-toggle" role="button" tabindex="0" aria-expanded="true" title="Click to minimize or restore player">
+          <div class="dock-title-group">
+            <span class="dock-indicator" aria-hidden="true"></span>
+            <span class="dock-label">AUDIO DECK</span>
+            <span class="dock-sublabel">// ALTIMIT OS</span>
+          </div>
+          <div class="dock-actions">
+            <button type="button" class="dock-btn-toggle" id="webdeck-dock-btn" aria-label="Minimize Player" title="Minimize">−</button>
+          </div>
+        </div>
+        <div class="webdeck-dock-body">
+          <iframe id="webdeck-iframe" src="/webdeck-player/index.html" title="WebDeck Player" allow="autoplay"></iframe>
+        </div>
+      `;
+      document.body.appendChild(dock);
+
+      const header = dock.querySelector("#webdeck-dock-toggle");
+      const btn = dock.querySelector("#webdeck-dock-btn");
+
+      header?.addEventListener("click", () => {
+        const isMinimized = dock.classList.contains("dock-minimized");
+        setDockState(dock, !isMinimized);
+      });
+
+      btn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isMinimized = dock.classList.contains("dock-minimized");
+        setDockState(dock, !isMinimized);
+      });
     }
+    return dock;
+  }
 
-    const playerWindow = window.open(playerPath, playerName, playerFeatures);
-    if (!playerWindow) return false;
+  function setDockState(dock, isMinimized) {
+    const toggleBtn = dock.querySelector("#webdeck-dock-btn");
+    const header = dock.querySelector(".webdeck-dock-header");
 
+    dock.classList.remove("dock-hidden-init");
+
+    if (isMinimized) {
+      dock.classList.remove("dock-expanded");
+      dock.classList.add("dock-minimized");
+      if (toggleBtn) {
+        toggleBtn.textContent = "▲";
+        toggleBtn.setAttribute("aria-label", "Restore Player");
+        toggleBtn.title = "Restore";
+      }
+      header?.setAttribute("aria-expanded", "false");
+      localStorage.setItem(DOCK_STORAGE_KEY, "minimized");
+    } else {
+      dock.classList.remove("dock-minimized");
+      dock.classList.add("dock-expanded");
+      if (toggleBtn) {
+        toggleBtn.textContent = "−";
+        toggleBtn.setAttribute("aria-label", "Minimize Player");
+        toggleBtn.title = "Minimize";
+      }
+      header?.setAttribute("aria-expanded", "true");
+      localStorage.setItem(DOCK_STORAGE_KEY, "expanded");
+    }
+  }
+
+  function initDock() {
+    const dock = ensureDock();
+    const savedState = localStorage.getItem(DOCK_STORAGE_KEY);
+
+    if (savedState === "minimized") {
+      setDockState(dock, true);
+    } else {
+      // Smooth slide-up transition from off-screen
+      dock.classList.add("dock-hidden-init");
+      setTimeout(() => {
+        setDockState(dock, false);
+      }, 300);
+    }
+  }
+
+  window.openWebDeckPlayer = () => {
+    const dock = ensureDock();
+    setDockState(dock, false);
     return true;
   };
 
-  document.addEventListener("click", (event) => {
-    const target = event.target instanceof Element ? event.target : null;
-    if (!target?.closest(".side1 a")) return;
+  window.toggleWebDeckPlayer = () => {
+    const dock = ensureDock();
+    const isMinimized = dock.classList.contains("dock-minimized");
+    setDockState(dock, !isMinimized);
+    return true;
+  };
 
-    sidebarClickAudio.currentTime = 0;
-    sidebarClickAudio.play().catch(() => {});
-  });
-
+  // Launch / toggle dock when clicking any [data-open-webdeck] link
   document.addEventListener("click", (event) => {
     const launcher = event.target.closest("[data-open-webdeck]");
-    if (launcher && window.openWebDeckPlayer()) event.preventDefault();
+    if (launcher) {
+      event.preventDefault();
+      window.toggleWebDeckPlayer();
+    }
   });
 
-  if (window.location.pathname.endsWith("/home.html")) {
-    window.openWebDeckPlayer();
+  // =========================================
+  // PJAX PERSISTENT NAVIGATION
+  // =========================================
+  function isInternalPjaxLink(anchor) {
+    if (!anchor || !anchor.href) return false;
+    if (anchor.target && anchor.target !== "_self") return false;
+    if (anchor.hasAttribute("download")) return false;
+    if (anchor.getAttribute("href")?.startsWith("#")) return false;
+    if (anchor.hasAttribute("data-no-pjax") || anchor.closest("[data-no-pjax]")) return false;
+    if (anchor.hasAttribute("data-open-webdeck") || anchor.closest("[data-open-webdeck]")) return false;
+    if (anchor.classList.contains("reboot-control")) return false;
+
+    try {
+      const url = new URL(anchor.href, window.location.href);
+
+      // Support local testing and Neocities production domain
+      const isSameHost = url.host === window.location.host;
+      const isProdOnLocal = (url.host === "lonkofhyrool.neocities.org");
+      if (!isSameHost && !isProdOnLocal) return false;
+
+      let pathname = url.pathname;
+      if (pathname === "" || pathname === "/") pathname = "/home.html";
+
+      // Allow full page reload for the bootloader sequence or standalone player
+      if (pathname.endsWith("/index.html") || pathname.includes("/webdeck-player/")) {
+        return false;
+      }
+
+      // Ignore asset downloads
+      if (/\.(pdf|zip|mp3|ogg|png|jpg|jpeg|gif|svg|xml|txt)$/i.test(pathname)) {
+        return false;
+      }
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async function pjaxNavigate(targetHref, push = true) {
+    const url = new URL(targetHref, window.location.href);
+    if (url.host === "lonkofhyrool.neocities.org" && window.location.host !== "lonkofhyrool.neocities.org") {
+      url.protocol = window.location.protocol;
+      url.host = window.location.host;
+    }
+
+    if (url.pathname === window.location.pathname && url.search === window.location.search) {
+      return;
+    }
+
+    const currentContent = document.getElementById("main-content")
+      || document.getElementById("container")
+      || document.querySelector(".container");
+
+    if (currentContent) {
+      currentContent.classList.add("pjax-loading");
+    }
+
+    try {
+      let response = await fetch(url.href);
+      if (!response.ok && !url.pathname.endsWith(".html") && !url.pathname.endsWith("/")) {
+        const fallbackUrl = new URL(url.pathname + ".html" + url.search, url.origin);
+        const fallbackRes = await fetch(fallbackUrl.href);
+        if (fallbackRes.ok) {
+          response = fallbackRes;
+          url.pathname = fallbackUrl.pathname;
+        }
+      }
+
+      if (!response.ok) throw new Error("HTTP " + response.status);
+
+      const htmlText = await response.text();
+      const parser = new DOMParser();
+      const newDoc = parser.parseFromString(htmlText, "text/html");
+
+      const newContent = newDoc.getElementById("main-content")
+        || newDoc.getElementById("container")
+        || newDoc.querySelector(".container");
+
+      if (!newContent) {
+        window.location.href = url.href;
+        return;
+      }
+
+      // 1. Swap content
+      if (currentContent) {
+        currentContent.replaceWith(newContent);
+      } else {
+        document.body.prepend(newContent);
+      }
+
+      // 2. Update page title
+      if (newDoc.title) {
+        document.title = newDoc.title;
+      }
+
+      // 3. Update page-specific styles from newDoc head
+      document.querySelectorAll("[data-pjax-head]").forEach((el) => el.remove());
+
+      newDoc.head.querySelectorAll("style, link[rel='stylesheet']").forEach((node) => {
+        const href = node.getAttribute("href") || "";
+        if (href.includes("site-overrides.css") || href.includes("window-controls.css") || href.includes("fonts.googleapis.com")) {
+          return;
+        }
+        const clone = node.cloneNode(true);
+        clone.setAttribute("data-pjax-head", "true");
+        document.head.appendChild(clone);
+      });
+
+      // 4. Update history URL
+      if (push) {
+        window.history.pushState({ pjax: true, href: url.href }, "", url.href);
+      }
+
+      // 5. Scroll to top
+      window.scrollTo(0, 0);
+
+      // 6. Re-run page controls & scripts
+      if (typeof window.initWindowControls === "function") {
+        window.initWindowControls();
+      }
+      if (typeof window.initChangelog === "function") {
+        window.initChangelog();
+      }
+
+      // Background audio: if the new page has #bg-audio (e.g. home.html), play it
+      const bgAudio = document.getElementById("bg-audio");
+      if (bgAudio) {
+        bgAudio.play().catch(() => {});
+      }
+
+      window.dispatchEvent(new CustomEvent("pjax:navigated", { detail: { url: url.href } }));
+    } catch (err) {
+      console.warn("PJAX navigation failed, falling back to full load:", err);
+      window.location.href = url.href;
+    }
+  }
+
+  // Intercept all internal navigation link clicks
+  document.addEventListener("click", (event) => {
+    const anchor = event.target.closest("a");
+    if (!anchor || !isInternalPjaxLink(anchor)) return;
+
+    event.preventDefault();
+    pjaxNavigate(anchor.href);
+  });
+
+  // Handle browser Back / Forward buttons
+  window.addEventListener("popstate", () => {
+    pjaxNavigate(window.location.href, false);
+  });
+
+  // Mount and slide-up dock when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDock);
+  } else {
+    initDock();
   }
 })();

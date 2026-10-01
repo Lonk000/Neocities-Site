@@ -298,6 +298,7 @@ margin: 0;
   </head>
  
 <body>
+<div id="main-content">
 
 <!-- Background image extending under the transparent stripe -->
 <div class="page-bg"></div>
@@ -315,11 +316,11 @@ margin: 0;
  
 <!-- SIDEBAR LINKS WITH CUSTOM CLICK SOUND -->
 <div class="side1">
-<a href="https://lonkofhyrool.neocities.org/home.html" onmouseenter="playHoverSound()" onclick="openWebDeckPlayer()"><img src="https://i.imgur.com/FM4JrM1.png"><span>HOME</span></a>
+<a href="/home.html" onmouseenter="playHoverSound()"><img src="https://i.imgur.com/FM4JrM1.png"><span>HOME</span></a>
 <a href="/blog/" onmouseenter="playHoverSound()"><img src="https://i.imgur.com/WeZ6fmy.png"><span>BLOG</span></a>
-<a href="https://lonkofhyrool.neocities.org/guestbook" onmouseenter="playHoverSound()"><img src="https://i.imgur.com/KkJtAml.png"><span>GUESTBOOK</span></a>
-<a href="https://lonkofhyrool.neocities.org/credit" onmouseenter="playHoverSound()"><img src="https://i.imgur.com/eZGAhVt.png"><span>SOURCES</span></a>
-<a href="https://lonkofhyrool.neocities.org/data.html" onmouseenter="playHoverSound()"><img src="https://i.imgur.com/zKnelZI.png"><span>DATA</span></a>
+<a href="/guestbook.html" onmouseenter="playHoverSound()"><img src="https://i.imgur.com/KkJtAml.png"><span>GUESTBOOK</span></a>
+<a href="/credit.html" onmouseenter="playHoverSound()"><img src="https://i.imgur.com/eZGAhVt.png"><span>SOURCES</span></a>
+<a href="/data.html" onmouseenter="playHoverSound()"><img src="https://i.imgur.com/zKnelZI.png"><span>DATA</span></a>
 <a href="/webdeck-player/index.html" target="WebDeckPlayer" data-open-webdeck><img src="https://i.imgur.com/2SMR5ij.png"><span>PLAYER</span></a>
 </div>
  
@@ -385,6 +386,25 @@ margin: 0;
 </script>
  
 <script>function playClickSound() { playCustomClickSound(); }</script>
+</div><!-- /#main-content -->
+
+<!-- Persistent WebDeck Player Dock -->
+<div id="webdeck-dock" class="webdeck-dock dock-hidden-init" aria-label="WebDeck Audio Player">
+  <div class="webdeck-dock-header" id="webdeck-dock-toggle" role="button" tabindex="0" aria-expanded="true" title="Click to minimize or restore player">
+    <div class="dock-title-group">
+      <span class="dock-indicator" aria-hidden="true"></span>
+      <span class="dock-label">AUDIO DECK</span>
+      <span class="dock-sublabel">// ALTIMIT OS</span>
+    </div>
+    <div class="dock-actions">
+      <button type="button" class="dock-btn-toggle" id="webdeck-dock-btn" aria-label="Minimize Player" title="Minimize">−</button>
+    </div>
+  </div>
+  <div class="webdeck-dock-body">
+    <iframe id="webdeck-iframe" src="/webdeck-player/index.html" title="WebDeck Player" allow="autoplay"></iframe>
+  </div>
+</div>
+
 <script src="/player-window.js"></script>
 </body>
 </html>
