@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data &amp; Webring - Lonk of Hyrool</title>
+    <title>Data &amp; Data - Lonk of Hyrool</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
@@ -158,23 +158,61 @@
         margin-bottom: 1rem;
       }
 
-      .ring-badge {
-        display: inline-flex;
-        max-width: 100%;
-        padding: 6px;
-        border: 1px solid #51815d;
-        background: rgba(81, 129, 93, 0.1);
+      /* Neighbors on the Net button grid & zoom styling */
+      .neighbors-grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin: 1.25rem 0 0.5rem;
+        padding: 1rem;
+        background: rgba(81, 129, 93, 0.08);
+        border: 2px dashed #51815d;
       }
 
-      .ring-badge img {
-        display: block;
-        width: 200px;
-        max-width: 100%;
-        height: auto;
+      .neighbors-grid a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+        text-decoration: none;
       }
-      .ring-caption {
-        margin-top: 0.5rem;
+
+      .neighbors-grid img {
+        display: block;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+        transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), filter 0.22s ease;
+        border: 1px solid rgba(81, 129, 93, 0.35);
+      }
+
+      .neighbors-grid a:hover img {
+        transform: scale(1.18);
+        z-index: 5;
+        border-color: #97D9E9;
+        box-shadow: 0 0 10px rgba(151, 217, 233, 0.6);
+        filter: brightness(1.08);
+      }
+
+      /* Dynamic retro tooltip */
+      #site-tooltip {
+        position: absolute;
+        display: none;
+        max-width: 280px;
+        padding: 6px 10px;
+        background: #0d1712;
+        color: #88d5e0;
+        border: 1px solid #5b916a;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 0 6px rgba(91, 145, 106, 0.4);
+        font-family: 'Share Tech Mono', monospace;
         font-size: 12px;
+        line-height: 1.4;
+        letter-spacing: 0.5px;
+        pointer-events: none;
+        z-index: 10005;
+        border-radius: 2px;
+        box-sizing: border-box;
       }
 
       a {
@@ -308,16 +346,33 @@
 
     <div class="container">
       <section class="box" aria-labelledby="webring-title">
-        <h2 class="subheaders" id="webring-title">Webring</h2>
+        <h2 class="subheaders" id="webring-title">Neighbors on the Net</h2>
         <div class="content">
-          <p>check out these sites!</p>
-          <a class="ring-badge" href="https://ssmrk.dothome.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Visit the webring site">
-            <img src="https://ssmrk.dothome.co.kr/img/bn.png" alt="Webring banner">
-          </a>
-          <p class="ring-caption">This is a friend I made trying to find people who played Double Cross 3rd Edition, they're from Korea!</p>
+          <p>A collection of webrings, friends, and cool personal sites discovered across the independent web. Hover over any button for info!</p>
+          
+          <div class="neighbors-grid">
+            <a href="https://ssmrk.dothome.co.kr/" target="_blank" rel="noopener noreferrer" data-tip="SSMRK — Friend I made looking for Double Cross 3rd Edition players.They're from Korea, and they have all the books! We onnly have 3 in english orz.">
+              <img src="https://ssmrk.dothome.co.kr/img/bn.png" alt="SSMRK" style="width:200px;height:40px;">
+            </a>
+            <a href="https://repth.neocities.org/" target="_blank" rel="noopener noreferrer" data-tip="Repth — Creator of the theme  for this site, they're awesome">
+              <img src="https://i.imgur.com/GMVIpqB.png" alt="Repth" style="width:88px;height:31px;">
+            </a>
+            <a href="https://thesilveregg.neocities.org/" target="_blank" rel="noopener noreferrer" data-tip="The Silver Egg — My favourite news(?)paper(?)!">
+              <img src="https://thesilveregg.neocities.org/buttons/egg%20button.png" alt="The Silver Egg" style="width:88px;height:31px;">
+            </a>
+            <a href="https://yatagarasu.nekoweb.org" target="_blank" rel="noopener noreferrer" data-tip="Yatagarasu — Awesome personal site with sticker/shrine collections found via Navlink Ads!">
+              <img src="https://yatagarasu.nekoweb.org/images/yatagarasuButtonB.gif" alt="Yatagarasu" style="width:88px;height:31px;">
+            </a>
+            <a href="https://oversurge.nekoweb.org" target="_blank" rel="noopener noreferrer" data-tip="Oversurge — Fellow Gunvolt fan with a really cool website! (- Brilliant lightning flashes forth -)">
+              <img src="https://oversurge.nekoweb.org/osvbtnanim.gif" alt="Oversurge" style="width:88px;height:31px;">
+            </a>
+          </div>
         </div>
       </section>
     </div>
+
+    <!-- Floating Tooltip Container -->
+    <div id="site-tooltip" role="tooltip" aria-hidden="true"></div>
 
     <div class="footerwrapper"></div>
     <p id="credit">Theme by <a href="https://repth.neocities.org/index.html">Repth</a></p>
@@ -356,6 +411,66 @@
           oscillator.stop(context.currentTime + 0.06);
         } catch (error) {}
       }
+
+      // Initialize tooltips for buttons
+      function initTooltips() {
+        const tooltip = document.getElementById('site-tooltip');
+        if (!tooltip) return;
+
+        const targets = document.querySelectorAll('[data-tip]');
+        targets.forEach(target => {
+          target.addEventListener('mouseenter', (e) => {
+            const text = target.getAttribute('data-tip');
+            if (!text) return;
+            tooltip.textContent = text;
+            tooltip.style.display = 'block';
+            tooltip.setAttribute('aria-hidden', 'false');
+            positionTooltip(e);
+          });
+
+          target.addEventListener('mousemove', (e) => {
+            positionTooltip(e);
+          });
+
+          target.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+            tooltip.setAttribute('aria-hidden', 'true');
+          });
+
+          target.addEventListener('focus', () => {
+            const text = target.getAttribute('data-tip');
+            if (!text) return;
+            const rect = target.getBoundingClientRect();
+            tooltip.textContent = text;
+            tooltip.style.display = 'block';
+            tooltip.setAttribute('aria-hidden', 'false');
+            tooltip.style.left = (rect.left + window.scrollX) + 'px';
+            tooltip.style.top = (rect.bottom + window.scrollY + 6) + 'px';
+          });
+
+          target.addEventListener('blur', () => {
+            tooltip.style.display = 'none';
+            tooltip.setAttribute('aria-hidden', 'true');
+          });
+        });
+
+        function positionTooltip(e) {
+          const x = e.pageX + 14;
+          const y = e.pageY + 16;
+          const tipWidth = tooltip.offsetWidth || 180;
+          const maxRight = window.scrollX + window.innerWidth - tipWidth - 10;
+          tooltip.style.left = Math.min(x, maxRight) + 'px';
+          tooltip.style.top = y + 'px';
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTooltips);
+      } else {
+        initTooltips();
+      }
+
+      window.addEventListener('pjax:navigated', initTooltips);
     </script>
     </div><!-- /#main-content -->
 

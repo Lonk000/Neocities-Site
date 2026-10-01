@@ -126,15 +126,20 @@ z-index: 2;
 .container{
 display: grid;
 grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.8fr);
-grid-template-areas:
-  "about socials"
-  "updates todo";
 align-items: start;
 gap: 1.5rem;
 margin-left: 200px;
 padding: 3rem 3rem 5rem 0;
 position: relative;
 z-index: 1;
+}
+
+.col-left,
+.col-right {
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
+min-width: 0;
 }
  
 .box{
@@ -144,16 +149,79 @@ margin: 0;
 position: relative;
 z-index: 1;
 align-self: start;
+width: 100%;
 }
-
-.about-box { grid-area: about; }
-.socials-box { grid-area: socials; }
-.updates-box { grid-area: updates; }
-.todo-box { grid-area: todo; }
  
 .content{
 padding: 1.5rem;
 line-height: 1.6;
+}
+
+.status-content {
+padding: 1rem 1.25rem;
+}
+
+#statuscafe {
+background: rgba(81, 129, 93, 0.1);
+border-left: 4px solid #51815d;
+padding: 0.75rem 1rem;
+}
+
+#statuscafe-username {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+margin-bottom: 0.5rem;
+padding-bottom: 0.35rem;
+border-bottom: 1px dashed rgba(81, 129, 93, 0.35);
+font-size: 0.875rem;
+color: #555;
+}
+
+#statuscafe-username a {
+color: #005f73;
+font-weight: bold;
+}
+
+.status-face {
+font-size: 1.1rem;
+}
+
+.status-time {
+margin-left: auto;
+font-size: 0.75rem;
+color: #666;
+}
+
+#statuscafe-content {
+line-height: 1.5;
+font-size: 0.95rem;
+color: #111;
+}
+
+#statuscafe-content p {
+margin: 0;
+}
+
+.discord-widget-wrap {
+margin-top: 0.85rem;
+width: 100%;
+display: flex;
+justify-content: center;
+}
+
+.discord-widget-wrap ws-widget {
+width: 100%;
+display: block;
+}
+
+.discord-widget-wrap .disc-hub {
+border-left: 4px solid #51815d !important;
+background: rgba(81, 129, 93, 0.1) !important;
+border-radius: 0 !important;
+padding: 0.75rem !important;
+box-sizing: border-box !important;
+width: 100% !important;
 }
 
 .content p {
@@ -424,16 +492,21 @@ width: 100%;
 height: 15px;
 }
 .container{
-grid-template-columns: minmax(0, 1fr);
-grid-template-areas:
-  "about"
-  "socials"
-  "updates"
-  "todo";
+display: flex;
+flex-direction: column;
 gap: 1rem;
 margin: 0;
 padding: 1rem 1rem 4rem;
 }
+.col-left,
+.col-right {
+display: contents;
+}
+.about-box { order: 1; }
+.status-box { order: 2; }
+.socials-box { order: 3; }
+.updates-box { order: 4; }
+.todo-box { order: 5; }
 .box{
 margin: 0;
 }
@@ -442,6 +515,7 @@ margin: 0;
 </style>
   <link rel="stylesheet" href="window-controls.css">
   <link rel="stylesheet" href="site-overrides.css">
+  <script src="https://u.widget.st/ar.js"></script>
   <script src="window-controls.js" defer></script>
   <script src="changelog.js" defer></script>
   </head>
@@ -482,66 +556,95 @@ margin: 0;
 </div>
  
 <div class="container">
-  <!-- BOX 1: ABOUT ME -->
-  <div class="box about-box">
-    <h3 class="subheaders">About Me!</h3>
-    <div class="content">
-      <img style="float:left;margin:0px 10px 10px 0px;width:230px;border:1px solid #97D9E9;" src="https://iili.io/F6Endej.jpg" alt="Profile Picture">
-      <br/>  
-      Hi! I'm Lonk! I tend to not know about a lot of stuff, so forgive me if I don't get something. Feel free to send a message if you feel like it or somethin' 
-      <br/><br/>
-      <h3>Fun fact, during COVID, I consumed every piece of media imaginable. Name anything and I bet you I will know about it to some extent. Try me (｀▽´)!!</h3>
-      <br/><br/>
-      <br/><br/>
-      <hr style="border: 0; border-top: 1px solid #ccc; margin: 1rem 0;" />
-      <h3>"There is no such thing as a worthless person, being born is more than enough" - Machida-kun</h3>
+  <!-- LEFT COLUMN -->
+  <div class="col-left">
+    <!-- BOX 1: ABOUT ME -->
+    <div class="box about-box">
+      <h3 class="subheaders">About Me!</h3>
+      <div class="content">
+        <img style="float:left;margin:0px 10px 10px 0px;width:230px;border:1px solid #97D9E9;" src="https://iili.io/F6Endej.jpg" alt="Profile Picture">
+        <br/>  
+        Hi! I'm Lonk! I tend to not know about a lot of stuff, so forgive me if I don't get something. Feel free to send a message if you feel like it or somethin' 
+        <br/><br/>
+        <h3>Fun fact, during COVID, I consumed every piece of media imaginable. Name anything and I bet you I will know about it to some extent. Try me (｀▽´)!!</h3>
+        <br/><br/>
+        <br/><br/>
+        <hr style="border: 0; border-top: 1px solid #ccc; margin: 1rem 0;" />
+        <h3>"There is no such thing as a worthless person, being born is more than enough" - Machida-kun</h3>
+      </div>
     </div>
+
+    <!-- RECENT UPDATES -->
+    <section class="box updates-box" aria-labelledby="updates-title" data-changelog>
+      <h2 class="subheaders" id="updates-title">Recent Updates</h2>
+      <div class="content">
+        <div class="updates-toolbar">
+          <label class="updates-page-size">Entries per page
+            <select data-page-size aria-label="Entries per page">
+              <option value="5" selected>5</option>
+              <option value="10">10</option>
+              <option value="25">25</option>
+            </select>
+          </label>
+          <nav class="updates-pagination" aria-label="Recent updates pages">
+            <button type="button" data-page-previous disabled>Previous</button>
+            <span class="updates-page-status" data-page-status aria-live="polite">Loading updates...</span>
+            <button type="button" data-page-next disabled>Next</button>
+          </nav>
+        </div>
+        <ul class="updates-list" data-updates-list></ul>
+      </div>
+    </section>
   </div>
 
-  <section class="box socials-box" aria-labelledby="socials-title">
-    <h2 class="subheaders" id="socials-title">Socials</h2>
-    <div class="content">
-      <ul class="social-links">
-        <li>Discord: <strong>lonkofhyrool</strong></li>
-        <li><a href="https://www.instagram.com/lonkofhyrool" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="https://twitter.com/lonkofhyrool" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
-        <li><a href="https://www.twitch.tv/lonkofhyrool" target="_blank" rel="noopener noreferrer">Twitch</a></li>
-        <li><a href="https://open.spotify.com/playlist/2exFlWSu0Si4Q7dBoRzCvb" target="_blank" rel="noopener noreferrer">Spotify: Lonk's Sampler</a></li>
-        <li><a href="https://spacehey.com/lonk" target="_blank" rel="noopener noreferrer">SpaceHey</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="box updates-box" aria-labelledby="updates-title" data-changelog>
-    <h2 class="subheaders" id="updates-title">Recent Updates</h2>
-    <div class="content">
-      <div class="updates-toolbar">
-        <label class="updates-page-size">Entries per page
-          <select data-page-size aria-label="Entries per page">
-            <option value="5" selected>5</option>
-            <option value="10">10</option>
-            <option value="25">25</option>
-          </select>
-        </label>
-        <nav class="updates-pagination" aria-label="Recent updates pages">
-          <button type="button" data-page-previous disabled>Previous</button>
-          <span class="updates-page-status" data-page-status aria-live="polite">Loading updates...</span>
-          <button type="button" data-page-next disabled>Next</button>
-        </nav>
+  <!-- RIGHT COLUMN -->
+  <div class="col-right">
+    <!-- STATUS BOX -->
+    <section class="box status-box" aria-labelledby="status-title">
+      <h2 class="subheaders" id="status-title">Status</h2>
+      <div class="content status-content">
+        <div id="statuscafe" data-user="lonk">
+          <div id="statuscafe-username">
+            <a href="https://status.cafe/users/lonk" target="_blank" rel="noopener noreferrer">lonk</a>
+            <span class="status-face" aria-label="Mood">🤔</span>
+            <span class="status-time">today</span>
+          </div>
+          <div id="statuscafe-content">
+            <p>Browsing music, tweaking the ALTIMIT terminal, and exploring the web! (｀▽´)ゞ</p>
+          </div>
+        </div>
+        <div class="discord-widget-wrap">
+          <ws-widget type="discord" iid="17333" embed="script" width="100%"></ws-widget>
+        </div>
       </div>
-      <ul class="updates-list" data-updates-list></ul>
-    </div>
-  </section>
+    </section>
 
-  <section class="box todo-box" aria-labelledby="todo-title">
-    <h2 class="subheaders" id="todo-title">Site To-Do</h2>
-    <div class="content">
-      <ul class="todo-list">
-        <li><label><input type="checkbox"> Add more playlists</label></li>
-        <li><label><input type="checkbox"> Post a new blog entry</label></li>
-      </ul>
-    </div>
-  </section>
+    <!-- SOCIALS -->
+    <section class="box socials-box" aria-labelledby="socials-title">
+      <h2 class="subheaders" id="socials-title">Socials</h2>
+      <div class="content">
+        <ul class="social-links">
+          <li>Discord: <strong>lonkofhyrool</strong></li>
+          <li><a href="https://www.instagram.com/lonkofhyrool" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://twitter.com/lonkofhyrool" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
+          <li><a href="https://www.twitch.tv/lonkofhyrool" target="_blank" rel="noopener noreferrer">Twitch</a></li>
+          <li><a href="https://open.spotify.com/playlist/2exFlWSu0Si4Q7dBoRzCvb" target="_blank" rel="noopener noreferrer">Spotify: Lonk's Sampler</a></li>
+          <li><a href="https://spacehey.com/lonk" target="_blank" rel="noopener noreferrer">SpaceHey</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SITE TO-DO -->
+    <section class="box todo-box" aria-labelledby="todo-title">
+      <h2 class="subheaders" id="todo-title">Site To-Do</h2>
+      <div class="content">
+        <ul class="todo-list">
+          <li><label><input type="checkbox"> Add more playlists</label></li>
+          <li><label><input type="checkbox"> Post a new blog entry</label></li>
+        </ul>
+      </div>
+    </section>
+  </div>
 </div>
 
 <div class="footerwrapper">.</div>
@@ -587,6 +690,29 @@ margin: 0;
             clickAudio.play().catch(e => console.log("Audio play restricted:", e));
         }
     }
+
+    function loadStatusCafe(username) {
+        if (!username) return;
+        fetch('https://status.cafe/users/' + encodeURIComponent(username) + '/status.json')
+            .then(r => r.json())
+            .then(r => {
+                if (!r || !r.content || !r.content.trim()) return;
+                const uEl = document.getElementById('statuscafe-username');
+                const cEl = document.getElementById('statuscafe-content');
+                if (uEl) {
+                    uEl.innerHTML = '<a href="https://status.cafe/users/' + encodeURIComponent(username) + '" target="_blank" rel="noopener noreferrer">' + (r.author || username) + '</a> <span class="status-face">' + (r.face || '🤔') + '</span> <span class="status-time">' + (r.timeAgo || '') + '</span>';
+                }
+                if (cEl) {
+                    cEl.innerHTML = '<p>' + r.content + '</p>';
+                }
+            })
+            .catch(() => {});
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const scUser = document.getElementById('statuscafe')?.dataset?.user;
+        if (scUser) loadStatusCafe(scUser);
+    });
 </script>
  
 <script>function playClickSound() { playCustomClickSound(); }</script>

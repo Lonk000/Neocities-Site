@@ -341,6 +341,17 @@
         document.head.appendChild(clone);
       });
 
+      // Load any external scripts from the new page that aren't yet in the document
+      newDoc.querySelectorAll("script[src]").forEach((s) => {
+        const src = s.getAttribute("src");
+        if (src && !src.includes("player-window.js") && !document.querySelector(`script[src="${src}"]`)) {
+          const newScript = document.createElement("script");
+          newScript.src = src;
+          if (s.defer) newScript.defer = true;
+          document.head.appendChild(newScript);
+        }
+      });
+
       // 4. Update history URL
       if (push) {
         window.history.pushState({ pjax: true, href: url.href }, "", url.href);
