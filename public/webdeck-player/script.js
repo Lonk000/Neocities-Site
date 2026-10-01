@@ -49,6 +49,7 @@ var currentPlaylist = "Welcome to The World";
  * You can also delete the themes that you don't want.
 */
 var myThemes = {
+    "ALTIMIT OS": 'altimit',
     "DEFAULT": 'default',
     "SILVER": 'silver',
     "VIOLET": "violet",
@@ -62,7 +63,7 @@ var myThemes = {
  * [4. CURRENT THEME]
  * Set the theme of your player writing its name below.
  */
-var currentTheme = "SILVER";
+var currentTheme = "ALTIMIT OS";
 
 
 // ===== END OF CONFIGURATION =====
@@ -327,6 +328,7 @@ themeSelector.addEventListener("change", function() {
     stopButton.innerHTML = "<img src='./themes/" + myThemes[currentTheme] + "/images/stop.png' alt=''>";
     nextButton.innerHTML = "<img src='./themes/" + myThemes[currentTheme] + "/images/next.png' alt=''>";
     infoButton.innerHTML = "<img src='./themes/" + myThemes[currentTheme] + "/images/info.png' alt=''>";
+    logo.innerHTML = "<img src='./themes/" + myThemes[currentTheme] + "/logo.png' alt=''>";
 });
 
 

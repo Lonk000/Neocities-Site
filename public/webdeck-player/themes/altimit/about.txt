@@ -1,0 +1,3 @@
+ALTIMIT OS THEME - FOR WEBDECK PLAYER
+Created for Lonk of Hyrool
+A retro cyberpunk ALTIMIT / Vigil terminal theme styled with phosphor green readouts, cyber cyan highlights, and tactile CRT scanline borders.
