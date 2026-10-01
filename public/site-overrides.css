@@ -198,17 +198,17 @@ h1 {
    ========================================= */
 @media (max-width: 750px) {
   #webdeck-dock {
-    /* Pin to bottom-right or middle-right edge */
-    top: auto;
+    display: flex;
+    flex-direction: row;
     bottom: 12px;
     right: 0;
     left: auto;
-    width: 320px;
-    max-width: calc(100vw - 16px);
+    width: auto;
+    max-width: 100vw;
     border: 2px solid #5b916a;
     border-right: none;
     box-shadow: -4px 6px 20px rgba(0, 0, 0, 0.9), 0 0 10px rgba(91, 145, 106, 0.45);
-    transform-origin: bottom right;
+    transform-origin: center right;
     transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
   }
 
@@ -218,10 +218,10 @@ h1 {
     opacity: 0;
   }
 
-  /* Minimized state: player body slides out to the right; 
-     Header tab or side tab remains visible on screen */
+  /* Minimized state: player body slides out to the right off-screen.
+     The 36px vertical bar remains flush against the right edge of the screen */
   #webdeck-dock.dock-minimized {
-    transform: translateX(calc(100% - 38px)) !important;
+    transform: translateX(calc(100% - 36px)) !important;
     opacity: 1 !important;
   }
 
@@ -235,27 +235,109 @@ h1 {
     opacity: 1 !important;
   }
 
+  /* Vertical bar on the side of the player */
   .webdeck-dock-header {
-    height: 34px;
-    padding: 0 8px;
+    width: 36px;
+    height: auto;
+    min-height: 160px;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 4px;
+    border-bottom: none;
+    border-right: 2px solid #5b916a;
+    background: linear-gradient(90deg, #18281e 0%, #0d1611 100%);
+    box-sizing: border-box;
+    cursor: pointer;
+    flex-shrink: 0;
   }
 
-  /* When minimized on mobile, show a compact vertical tab style */
-  #webdeck-dock.dock-minimized .dock-sublabel {
+  .webdeck-dock-header:hover {
+    background: linear-gradient(90deg, #223a2a 0%, #112017 100%);
+  }
+
+  .dock-actions {
+    order: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .dock-btn-toggle {
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+  }
+
+  .dock-title-group {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .dock-indicator {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+  }
+
+  .dock-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    letter-spacing: 2.5px;
+    font-size: 11px;
+    white-space: nowrap;
+    color: #88d5e0;
+  }
+
+  .dock-sublabel {
     display: none;
   }
 
+  /* Dock body with scrollable viewport when screen is smaller than player */
   .webdeck-dock-body {
-    /* Scale player frame to fit mobile width */
-    height: calc((320px - 4px) * (275 / 610));
-    max-height: 160px;
+    width: min(600px, calc(100vw - 36px));
+    height: 275px;
+    max-height: calc(100vh - 24px);
+    background: #000;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    position: relative;
+    flex-shrink: 1;
+    scrollbar-width: thin;
+    scrollbar-color: #5b916a #000;
+  }
+
+  .webdeck-dock-body::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .webdeck-dock-body::-webkit-scrollbar-track {
+    background-color: #000;
+  }
+
+  .webdeck-dock-body::-webkit-scrollbar-thumb {
+    background-color: #5b916a;
+    border: 1px solid #14221a;
   }
 
   #webdeck-iframe {
-    width: 610px !important;
+    width: 600px !important;
+    min-width: 600px !important;
     height: 275px !important;
-    transform-origin: top left;
-    transform: scale(calc((320px - 4px) / 610));
+    min-height: 275px !important;
+    border: none;
+    display: block;
+    transform: none !important;
   }
 }
 

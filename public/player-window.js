@@ -124,7 +124,17 @@
     }
   }
 
+  function tagInitialHeadStyles() {
+    document.head.querySelectorAll("style, link[rel='stylesheet']").forEach((node) => {
+      const href = node.getAttribute("href") || "";
+      if (!href.includes("site-overrides.css") && !href.includes("window-controls.css") && !href.includes("fonts.googleapis.com")) {
+        node.setAttribute("data-pjax-head", "true");
+      }
+    });
+  }
+
   function initDock() {
+    tagInitialHeadStyles();
     const dock = ensureDock();
     let savedState = null;
     try {
@@ -192,6 +202,23 @@
       if (target?.closest("#webdeck-dock-toggle, #webdeck-dock-btn")) {
         event.preventDefault();
         window.toggleWebDeckPlayer();
+      }
+    }
+  });
+
+  // Responsive button icon update on screen resize/orientation change
+  window.addEventListener("resize", () => {
+    const dock = document.getElementById("webdeck-dock");
+    if (dock) {
+      const isMinimized = dock.classList.contains("dock-minimized");
+      const toggleBtn = dock.querySelector("#webdeck-dock-btn");
+      const isMobile = window.matchMedia && window.matchMedia("(max-width: 750px)").matches;
+      if (toggleBtn) {
+        if (isMinimized) {
+          toggleBtn.textContent = isMobile ? "◀" : "▲";
+        } else {
+          toggleBtn.textContent = isMobile ? "▶" : "−";
+        }
       }
     }
   });
@@ -287,21 +314,30 @@
         document.body.prepend(newContent);
       }
 
-      // 2. Update page title
+      // 2. Update page title and body attributes
       if (newDoc.title) {
         document.title = newDoc.title;
       }
+      document.body.className = newDoc.body.className;
+      if (newDoc.body.getAttribute("style")) {
+        document.body.setAttribute("style", newDoc.body.getAttribute("style"));
+      } else {
+        document.body.removeAttribute("style");
+      }
 
-      // 3. Update page-specific styles from newDoc head
+      // 3. Update page-specific styles from newDoc head with resolved absolute URLs
       document.querySelectorAll("[data-pjax-head]").forEach((el) => el.remove());
 
       newDoc.head.querySelectorAll("style, link[rel='stylesheet']").forEach((node) => {
-        const href = node.getAttribute("href") || "";
-        if (href.includes("site-overrides.css") || href.includes("window-controls.css") || href.includes("fonts.googleapis.com")) {
+        const rawHref = node.getAttribute("href");
+        if (rawHref && (rawHref.includes("site-overrides.css") || rawHref.includes("window-controls.css") || rawHref.includes("fonts.googleapis.com"))) {
           return;
         }
         const clone = node.cloneNode(true);
         clone.setAttribute("data-pjax-head", "true");
+        if (rawHref) {
+          clone.setAttribute("href", new URL(rawHref, url.href).href);
+        }
         document.head.appendChild(clone);
       });
 
