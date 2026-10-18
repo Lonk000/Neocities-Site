@@ -632,7 +632,7 @@ margin: 0;
     <section class="box status-box" aria-labelledby="status-title">
       <h2 class="subheaders" id="status-title">Status</h2>
       <div class="content status-content">
-        <div id="statuscafe" data-user="lonkofhyrool">
+        <div id="statuscafe">
           <div id="statuscafe-username"></div>
           <div id="statuscafe-content"></div>
         </div>
@@ -714,31 +714,9 @@ margin: 0;
             clickAudio.play().catch(e => console.log("Audio play restricted:", e));
         }
     }
-
-    function loadStatusCafe(username) {
-        if (!username) return;
-        fetch('https://status.cafe/users/' + encodeURIComponent(username) + '/status.json')
-            .then(r => r.json())
-            .then(r => {
-                if (!r || !r.content || !r.content.trim()) return;
-                const uEl = document.getElementById('statuscafe-username');
-                const cEl = document.getElementById('statuscafe-content');
-                if (uEl) {
-                    uEl.innerHTML = '<a href="https://status.cafe/users/' + encodeURIComponent(username) + '" target="_blank" rel="noopener noreferrer">' + (r.author || username) + '</a> <span class="status-face">' + (r.face || '') + '</span> <span class="status-time">' + (r.timeAgo || '') + '</span>';
-                }
-                if (cEl) {
-                    cEl.innerHTML = '<p>' + r.content + '</p>';
-                }
-            })
-            .catch(() => {});
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        const scUser = document.getElementById('statuscafe')?.dataset?.user;
-        if (scUser) loadStatusCafe(scUser);
-    });
 </script>
  
+<script src="https://status.cafe/current-status.js?name=lonkofhyrool" defer></script>
 <script>function playClickSound() { playCustomClickSound(); }</script>
 </div><!-- /#main-content -->
 
@@ -748,7 +726,7 @@ margin: 0;
     <div class="dock-title-group">
       <span class="dock-indicator" aria-hidden="true"></span>
       <span class="dock-label">AUDIO DECK</span>
-      <span class="sublabel">// ALTIMIT OS</span>
+      <span class="dock-sublabel">// ALTIMIT OS</span>
     </div>
     <div class="dock-actions">
       <button type="button" class="dock-btn-toggle" id="webdeck-dock-btn" aria-label="Minimize Player" title="Minimize">−</button>
