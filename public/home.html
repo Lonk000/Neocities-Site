@@ -633,14 +633,8 @@ margin: 0;
       <h2 class="subheaders" id="status-title">Status</h2>
       <div class="content status-content">
         <div id="statuscafe" data-user="lonkofhyrool">
-          <div id="statuscafe-username">
-            <a href="https://status.cafe/users/lonkofhyrool" target="_blank" rel="noopener noreferrer">lonkofhyrool</a>
-            <span class="status-face" aria-label="Mood"></span>
-            <span class="status-time">today</span>
-          </div>
-          <div id="statuscafe-content">
-            <p>Just hanging out (｀▽´)ゞ</p>
-          </div>
+          <div id="statuscafe-username"></div>
+          <div id="statuscafe-content"></div>
         </div>
         <!-- Status.cafe Button -->
         <div class="statuscafe-btn-wrap">
@@ -730,7 +724,7 @@ margin: 0;
                 const uEl = document.getElementById('statuscafe-username');
                 const cEl = document.getElementById('statuscafe-content');
                 if (uEl) {
-                    uEl.innerHTML = '<a href="https://status.cafe/users/' + encodeURIComponent(username) + '" target="_blank" rel="noopener noreferrer">' + (r.author || username) + '</a> <span class="status-face">' + (r.face || '🤔') + '</span> <span class="status-time">' + (r.timeAgo || '') + '</span>';
+                    uEl.innerHTML = '<a href="https://status.cafe/users/' + encodeURIComponent(username) + '" target="_blank" rel="noopener noreferrer">' + (r.author || username) + '</a> <span class="status-face">' + (r.face || '') + '</span> <span class="status-time">' + (r.timeAgo || '') + '</span>';
                 }
                 if (cEl) {
                     cEl.innerHTML = '<p>' + r.content + '</p>';
@@ -750,4 +744,21 @@ margin: 0;
 
 <!-- Persistent WebDeck Player Dock -->
 <div id="webdeck-dock" class="webdeck-dock dock-hidden-init" aria-label="WebDeck Audio Player">
-  <div class="webdeck-dock-header" id
+  <div class="webdeck-dock-header" id="webdeck-dock-toggle" role="button" tabindex="0" aria-expanded="true" title="Click to minimize or restore player">
+    <div class="dock-title-group">
+      <span class="dock-indicator" aria-hidden="true"></span>
+      <span class="dock-label">AUDIO DECK</span>
+      <span class="sublabel">// ALTIMIT OS</span>
+    </div>
+    <div class="dock-actions">
+      <button type="button" class="dock-btn-toggle" id="webdeck-dock-btn" aria-label="Minimize Player" title="Minimize">−</button>
+    </div>
+  </div>
+  <div class="webdeck-dock-body">
+    <iframe id="webdeck-iframe" src="/webdeck-player/index.html?v=altimit" title="WebDeck Player" allow="autoplay"></iframe>
+  </div>
+</div>
+
+<script src="/player-window.js"></script>
+</body>
+</html>
