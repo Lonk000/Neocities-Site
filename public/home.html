@@ -260,39 +260,54 @@ background: rgba(81, 129, 93, 0.1);
 color: #005f73;
 }
 
-/* Hotlink Box Styling */
+/* Hotlink Box Styling Overrides */
 .hotlink-box-content {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 0.75rem;
-text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1rem;
+  text-align: center;
 }
 
-.button-preview-placeholder {
-width: 88px;
-height: 31px;
-border: 2px dashed #51815d;
-background: rgba(81, 129, 93, 0.08);
-display: flex;
-align-items: center;
-justify-content: center;
-font-family: 'Share Tech Mono', monospace;
-font-size: 10px;
-color: #555;
+.hotlink-button-img {
+  width: 81px;
+  height: 33px;
+  transform: scale(1.5); /* Scales button up to 1.5x size for clear visibility */
+  margin: 10px 0;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+  border: 2px solid #51815d;
+  box-shadow: 0 0 8px rgba(81, 129, 93, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.hotlink-button-img:hover {
+  transform: scale(1.75); /* Slight zoom on hover */
+  border-color: #97D9E9;
+  box-shadow: 0 0 12px rgba(151, 217, 233, 0.8);
 }
 
 .hotlink-textarea {
-width: 100%;
-height: 60px;
-resize: none;
-padding: 0.4rem;
-font-family: 'Share Tech Mono', monospace;
-font-size: 11px;
-background: rgba(81, 129, 93, 0.05);
-border: 2px ridge #51815d;
-color: #111;
-box-sizing: border-box;
+  width: 100%;
+  height: 68px;
+  resize: none;
+  padding: 0.5rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  background: #0d1712; /* Dark terminal contrast */
+  color: #89dda1; /* Bright green retro text */
+  border: 2px ridge #51815d;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.hotlink-textarea:focus {
+  outline: 1px solid #97D9E9;
+  color: #a8f0be;
 }
 
 .updates-list time {
@@ -689,14 +704,14 @@ margin: 0;
       </div>
     </section>
 
-    <!-- HOTLINK MY BUTTON BOX -->
+<!-- HOTLINK MY BUTTON BOX -->
     <section class="box hotlink-box" aria-labelledby="hotlink-title">
       <h2 class="subheaders" id="hotlink-title">Hotlink My Button</h2>
       <div class="content hotlink-box-content">
-        <a href="https://lonkofhyrool.neocities.org/home.html" target="_blank" rel="noopener noreferrer">
-          <img src="/button.gif" alt="Lonk of Hyrool" style="width:81px;height:33px;image-rendering:pixelated;display:block;border:1px solid #51815d;">
+        <a href="https://lonkofhyrool.neocities.org/home.html" target="_blank" rel="noopener noreferrer" title="Click to open homepage">
+          <img src="/button.gif" alt="Lonk of Hyrool" class="hotlink-button-img">
         </a>
-        <textarea class="hotlink-textarea" readonly onclick="this.select()">&lt;a href="https://lonkofhyrool.neocities.org/home.html" target="_blank"&gt;&lt;img src="https://lonkofhyrool.neocities.org/button.gif" alt="Lonk of Hyrool" width="81" height="33"&gt;&lt;/a&gt;</textarea>
+        <textarea class="hotlink-textarea" readonly onclick="this.select()" title="Click to select all text">&lt;a href="https://lonkofhyrool.neocities.org/home.html" target="_blank"&gt;&lt;img src="https://lonkofhyrool.neocities.org/button.gif" alt="Lonk of Hyrool" width="81" height="33"&gt;&lt;/a&gt;</textarea>
       </div>
     </section>
   </div>
