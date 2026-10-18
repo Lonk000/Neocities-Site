@@ -632,10 +632,10 @@ margin: 0;
     <section class="box status-box" aria-labelledby="status-title">
       <h2 class="subheaders" id="status-title">Status</h2>
       <div class="content status-content">
-        <div id="statuscafe">
-          <div id="statuscafe-username"></div>
-          <div id="statuscafe-content"></div>
-        </div>
+        <!-- Status.cafe Proxy Widget Integration -->
+        <div id="statuscafe"><div id="statuscafe-username"></div><div id="statuscafe-content"></div></div>
+        <script src="https://melonking.net/free/status-proxy.js?name=lonkofhyrool" defer></script>
+
         <!-- Status.cafe Button -->
         <div class="statuscafe-btn-wrap">
           <a href="https://status.cafe/users/lonkofhyrool" target="_blank" rel="noopener noreferrer" class="statuscafe-btn" onmouseenter="playHoverSound()">status.cafe ☕</a>
@@ -684,28 +684,6 @@ margin: 0;
     window.addEventListener('DOMContentLoaded', () => {
         const bgAudio = document.getElementById('bg-audio');
         bgAudio?.play().catch(e => console.log("Audio autoplay restricted:", e));
-
-        // Fetch status.cafe data via JSON endpoint to bypass Neocities external script restriction
-        fetch('https://status.cafe/users/lonkofhyrool/status.json')
-            .then(res => res.json())
-            .then(data => {
-                const uEl = document.getElementById('statuscafe-username');
-                const cEl = document.getElementById('statuscafe-content');
-                if (uEl) {
-                    uEl.innerHTML = '<a href="https://status.cafe/users/lonkofhyrool" target="_blank" rel="noopener noreferrer">' + (data.author || 'lonkofhyrool') + '</a>' +
-                                    (data.face ? ' <span class="status-face">' + data.face + '</span>' : '') +
-                                    (data.timeAgo ? ' <span class="status-time">' + data.timeAgo + '</span>' : '');
-                }
-                if (cEl) {
-                    cEl.innerHTML = '<p>' + (data.content || 'No status posted yet.') + '</p>';
-                }
-            })
-            .catch(() => {
-                const uEl = document.getElementById('statuscafe-username');
-                const cEl = document.getElementById('statuscafe-content');
-                if (uEl) uEl.innerHTML = '<a href="https://status.cafe/users/lonkofhyrool" target="_blank" rel="noopener noreferrer">lonkofhyrool</a>';
-                if (cEl) cEl.innerHTML = '<p>Could not load status.</p>';
-            });
     });
 
     function playHoverSound() {
