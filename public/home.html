@@ -161,22 +161,22 @@ line-height: 1.6;
 padding: 1rem 1.25rem;
 }
 
-/* Status.cafe iframe container matching site style */
 .statuscafe-frame-wrap {
 background: rgba(81, 129, 93, 0.1);
 border-left: 4px solid #51815d;
-padding: 0.75rem 1rem;
-margin-bottom: 0.75rem;
+padding: 0.6rem 0.85rem;
+margin-bottom: 0.85rem;
 width: 100%;
 box-sizing: border-box;
 }
 
 .statuscafe-iframe {
 width: 100%;
-height: 65px;
+height: 48px;
 border: none;
 background: transparent;
 display: block;
+overflow: hidden;
 }
 
 /* Status.cafe button styling matching site theme */
@@ -258,6 +258,41 @@ background: rgba(81, 129, 93, 0.1);
 
 .social-links a {
 color: #005f73;
+}
+
+/* Hotlink Box Styling */
+.hotlink-box-content {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 0.75rem;
+text-align: center;
+}
+
+.button-preview-placeholder {
+width: 88px;
+height: 31px;
+border: 2px dashed #51815d;
+background: rgba(81, 129, 93, 0.08);
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: 'Share Tech Mono', monospace;
+font-size: 10px;
+color: #555;
+}
+
+.hotlink-textarea {
+width: 100%;
+height: 60px;
+resize: none;
+padding: 0.4rem;
+font-family: 'Share Tech Mono', monospace;
+font-size: 11px;
+background: rgba(81, 129, 93, 0.05);
+border: 2px ridge #51815d;
+color: #111;
+box-sizing: border-box;
 }
 
 .updates-list time {
@@ -511,6 +546,7 @@ display: contents;
 .socials-box { order: 3; }
 .updates-box { order: 4; }
 .todo-box { order: 5; }
+.hotlink-box { order: 6; }
 .box{
 margin: 0;
 }
@@ -607,15 +643,23 @@ margin: 0;
     <section class="box status-box" aria-labelledby="status-title">
       <h2 class="subheaders" id="status-title">Status</h2>
       <div class="content status-content">
+        
         <!-- PetraPixel Status.cafe Iframe Integration -->
         <div class="statuscafe-frame-wrap">
-          <iframe src="https://petracoding.github.io/neocities/widgets/statuscafe?center=0&marquee=0&font-family=Karla&font-size=14px&color=#111111&linkColor=#005f73&username=lonkofhyrool&hideUsername=0&timeColor=#666666" class="statuscafe-iframe" frameborder="0" title="Status.Cafe Status"></iframe>
+          <iframe 
+            src="https://petracoding.github.io/neocities/widgets/statuscafe?username=lonkofhyrool&font-family=Karla, sans-serif&font-size=15px&color=%23111111&linkColor=%23005f73&timeColor=%23555555&marquee=0&center=0&hideUsername=0" 
+            class="statuscafe-iframe" 
+            frameborder="0" 
+            scrolling="no"
+            title="Status.Cafe Status">
+          </iframe>
         </div>
 
         <!-- Status.cafe Button -->
         <div class="statuscafe-btn-wrap">
           <a href="https://status.cafe/users/lonkofhyrool" target="_blank" rel="noopener noreferrer" class="statuscafe-btn" onmouseenter="playHoverSound()">status.cafe ☕</a>
         </div>
+
           <ws-widget type="discord" iid="17333" embed="script"></ws-widget>
       </div>
     </section>
@@ -642,6 +686,15 @@ margin: 0;
           <li><label><input type="checkbox"> Add more playlists</label></li>
           <li><label><input type="checkbox"> Post a new blog entry</label></li>
         </ul>
+      </div>
+    </section>
+
+    <!-- HOTLINK MY BUTTON BOX -->
+    <section class="box hotlink-box" aria-labelledby="hotlink-title">
+      <h2 class="subheaders" id="hotlink-title">Hotlink My Button</h2>
+      <div class="content hotlink-box-content">
+        <div class="button-preview-placeholder">88x31 Button</div>
+        <textarea class="hotlink-textarea" readonly onclick="this.select()">&lt;a href="https://lonkofhyrool.neocities.org/" target="_blank"&gt;&lt;img src="https://lonkofhyrool.neocities.org/your-button.gif" alt="Lonk of Hyrool" width="88" height="31"&gt;&lt;/a&gt;</textarea>
       </div>
     </section>
   </div>
@@ -701,14 +754,14 @@ margin: 0;
     <div class="dock-title-group">
       <span class="dock-indicator" aria-hidden="true"></span>
       <span class="dock-label">AUDIO DECK</span>
-      <span class="sublabel">// ALTIMIT OS</span>
+      <span class="dock-sublabel">// ALTIMIT OS</span>
     </div>
     <div class="dock-actions">
       <button type="button" class="dock-btn-toggle" id="webdeck-dock-btn" aria-label="Minimize Player" title="Minimize">−</button>
     </div>
   </div>
   <div class="webdeck-dock-body">
-    <iframe id="webdeck-iframe" src="/webdeck-player/index.html?v=altimit" title="WebDeck Player" allow="autoplay"></iframe>
+    <iframe id="webdeck-iframe" src="/webdeck-player/index.html?v=altimit" title="WebDeck Player" allow="autoplay">Animations enabled</iframe>
   </div>
 </div>
 
