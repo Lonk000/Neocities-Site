@@ -165,6 +165,7 @@ padding: 1rem 1.25rem;
 background: rgba(81, 129, 93, 0.1);
 border-left: 4px solid #51815d;
 padding: 0.75rem 1rem;
+margin-bottom: 0.75rem;
 }
 
 #statuscafe-username {
@@ -201,6 +202,34 @@ color: #111;
 
 #statuscafe-content p {
 margin: 0;
+}
+
+/* Status.cafe button styling matching site theme */
+.statuscafe-btn-wrap {
+display: flex;
+justify-content: center;
+margin-bottom: 0.85rem;
+}
+
+.statuscafe-btn {
+display: inline-block;
+padding: 0.35rem 0.75rem;
+background: rgba(81, 129, 93, 0.15);
+border: 2px ridge #51815d;
+color: #005f73;
+font-size: 0.85rem;
+font-family: 'Share Tech Mono', monospace;
+letter-spacing: 1px;
+text-align: center;
+text-decoration: none;
+transition: background 0.15s ease;
+}
+
+.statuscafe-btn:hover {
+background: rgba(81, 129, 93, 0.3);
+color: #003d4c;
+font-weight: bold;
+text-shadow: none;
 }
 
 .discord-widget-wrap {
@@ -603,15 +632,19 @@ margin: 0;
     <section class="box status-box" aria-labelledby="status-title">
       <h2 class="subheaders" id="status-title">Status</h2>
       <div class="content status-content">
-        <div id="statuscafe" data-user="lonk">
+        <div id="statuscafe" data-user="lonkofhyrool">
           <div id="statuscafe-username">
-            <a href="https://status.cafe/users/lonk" target="_blank" rel="noopener noreferrer">lonk</a>
+            <a href="https://status.cafe/users/lonkofhyrool" target="_blank" rel="noopener noreferrer">lonkofhyrool</a>
             <span class="status-face" aria-label="Mood"></span>
             <span class="status-time">today</span>
           </div>
           <div id="statuscafe-content">
             <p>Just hanging out (｀▽´)ゞ</p>
           </div>
+        </div>
+        <!-- Status.cafe Button -->
+        <div class="statuscafe-btn-wrap">
+          <a href="https://status.cafe/users/lonkofhyrool" target="_blank" rel="noopener noreferrer" class="statuscafe-btn" onmouseenter="playHoverSound()">status.cafe ☕</a>
         </div>
           <ws-widget type="discord" iid="17333" embed="script"></ws-widget>
       </div>
@@ -717,21 +750,4 @@ margin: 0;
 
 <!-- Persistent WebDeck Player Dock -->
 <div id="webdeck-dock" class="webdeck-dock dock-hidden-init" aria-label="WebDeck Audio Player">
-  <div class="webdeck-dock-header" id="webdeck-dock-toggle" role="button" tabindex="0" aria-expanded="true" title="Click to minimize or restore player">
-    <div class="dock-title-group">
-      <span class="dock-indicator" aria-hidden="true"></span>
-      <span class="dock-label">AUDIO DECK</span>
-      <span class="dock-sublabel">// ALTIMIT OS</span>
-    </div>
-    <div class="dock-actions">
-      <button type="button" class="dock-btn-toggle" id="webdeck-dock-btn" aria-label="Minimize Player" title="Minimize">−</button>
-    </div>
-  </div>
-  <div class="webdeck-dock-body">
-    <iframe id="webdeck-iframe" src="/webdeck-player/index.html?v=altimit" title="WebDeck Player" allow="autoplay"></iframe>
-  </div>
-</div>
-
-<script src="/player-window.js"></script>
-</body>
-</html>
+  <div class="webdeck-dock-header" id
