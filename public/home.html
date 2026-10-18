@@ -684,6 +684,28 @@ margin: 0;
     window.addEventListener('DOMContentLoaded', () => {
         const bgAudio = document.getElementById('bg-audio');
         bgAudio?.play().catch(e => console.log("Audio autoplay restricted:", e));
+
+        // Fetch status.cafe data via JSON endpoint to bypass Neocities external script restriction
+        fetch('https://status.cafe/users/lonkofhyrool/status.json')
+            .then(res => res.json())
+            .then(data => {
+                const uEl = document.getElementById('statuscafe-username');
+                const cEl = document.getElementById('statuscafe-content');
+                if (uEl) {
+                    uEl.innerHTML = '<a href="https://status.cafe/users/lonkofhyrool" target="_blank" rel="noopener noreferrer">' + (data.author || 'lonkofhyrool') + '</a>' +
+                                    (data.face ? ' <span class="status-face">' + data.face + '</span>' : '') +
+                                    (data.timeAgo ? ' <span class="status-time">' + data.timeAgo + '</span>' : '');
+                }
+                if (cEl) {
+                    cEl.innerHTML = '<p>' + (data.content || 'No status posted yet.') + '</p>';
+                }
+            })
+            .catch(() => {
+                const uEl = document.getElementById('statuscafe-username');
+                const cEl = document.getElementById('statuscafe-content');
+                if (uEl) uEl.innerHTML = '<a href="https://status.cafe/users/lonkofhyrool" target="_blank" rel="noopener noreferrer">lonkofhyrool</a>';
+                if (cEl) cEl.innerHTML = '<p>Could not load status.</p>';
+            });
     });
 
     function playHoverSound() {
@@ -716,7 +738,6 @@ margin: 0;
     }
 </script>
  
-<script src="https://status.cafe/current-status.js?name=lonkofhyrool" defer></script>
 <script>function playClickSound() { playCustomClickSound(); }</script>
 </div><!-- /#main-content -->
 
