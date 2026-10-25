@@ -46,7 +46,8 @@
 
     const loadEntries = async () => {
       try {
-        const response = await fetch("/updates.md");
+        // Added cache-buster to prevent browsers from serving stale updates.md files
+        const response = await fetch("/updates.md?v=" + Date.now());
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         const markdown = await response.text();
